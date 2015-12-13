@@ -1,14 +1,16 @@
 
-var config = require('./config'),							// Configuration
-express = require('express'),							    // Express web application framework
-morgan = require('morgan'),									// For simple logging 
-compress = require('compression'),							// For compressing responses
-bodyParser = require('body-parser'),						// Middleware to handle request data
-methodOverride = require('method-override'),				// Provides 'PUT' & 'DELETE' http verbs
-session = require('express-session');						// For using sessions
+var config = require('./config'),								// Configuration
+	express = require('express'),							    // Express web application framework
+	morgan = require('morgan'),									// For simple logging 
+	compress = require('compression'),							// For compressing responses
+	bodyParser = require('body-parser'),						// Middleware to handle request data
+	methodOverride = require('method-override'),				// Provides 'PUT' & 'DELETE' http verbs
+	session = require('express-session'),						// For using sessions
+	flash = require('connect-flash'),							// For using flashes of sessions
+	passport = require('passport');								// For authentication
 
 module.exports = function() {
-	var app = express();									// Create the express application
+	var app = express();										// Create the express application
 
 	if (process.env.NODE_ENV === 'development') {
 		app.use(morgan('dev'));
@@ -29,15 +31,19 @@ module.exports = function() {
 		secret: config.sessionSecret
 	}));
 
-	app.set('views', './app/views');						// Define the folder for rendering views
-    app.set('view engine', 'ejs');							// ejs template engine for rendering views
+	app.use(flash());
+	app.use(passport.initialize());								// Registering passport in express application
+    app.use(passport.session());
 
-	require('../app/routes/index.server.routes.js')(app);	// Set routes configuration for index
+	app.set('views', './app/views');							// Define the folder for rendering views
+    app.set('view engine', 'ejs');								// ejs template engine for rendering views
+
+	require('../app/routes/index.server.routes.js')(app);		// Set routes configuration for index
 	require('../app/routes/users.server.routes.js')(app);
     
     // Folder for serving static files comes after routes config.
     // Express would first try to look for HTTP request paths in the static files folder.
-	app.use(express.static('./public'));					// Static files placed under public folder
+	app.use(express.static('./public'));						// Static files placed under public folder
 
 	return app;
 };
