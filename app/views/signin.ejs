@@ -11,6 +11,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <script>
+            function popupwindow(url, title, w, h) {
+                  var left = (screen.width/2)-(w/2);
+                  var top = (screen.height/2)-(h/2);
+                  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+            } 
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -36,6 +44,8 @@
 				<input type="submit" value="Sign In" />
 			</div>
 		</form>
+
+        <a href="" onclick="popupwindow('/oauth/facebook','Login with Facebook',500,350)">Sign in with Facebook</a>
 		 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

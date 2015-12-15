@@ -24,4 +24,13 @@ module.exports = function(app) {
 		.post(passport.authenticate('local', { successRedirect: '/', failureRedirect: '/signin', failureFlash: true }));
 
 	app.get('/signout', users.signout);
+
+	app.get('/oauth/facebook', passport.authenticate('facebook', {
+		failureRedirect: '/signin'
+	}));
+	
+	app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
+		failureRedirect: '/signin',
+		successRedirect: '/'
+	}));
 };
