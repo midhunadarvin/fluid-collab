@@ -11,6 +11,11 @@ module.exports = {
 		clientID: 'oCQKUccJmAvYusVHsmwUpOi6H',
 		clientSecret: '4miVrwCarnDzSBmK9vVI8yX0uxUldybjs0dItYdqIyvFpxlqca',
 		callbackURL: 'http://fluid-collab.herokuapp.com/oauth/twitter/callback'
+	},
+	google: {
+		clientID: '356704566819-n6pjekl2jlu7d6emt6a6289bh19g2uml.apps.googleusercontent.com',
+		clientSecret: 'xRg0pSA1tFQyXtj7XLd6T4PQ',
+		callbackURL: 'http://fluid-collab.herokuapp.com/oauth/google/callback'
 	}
 
 };
