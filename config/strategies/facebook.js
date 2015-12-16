@@ -26,6 +26,6 @@ module.exports = function() {
 				providerId: profile.id,
 				providerData: providerData
 			};
-			users.saveOAuthUserProfile(req, providerUserProfile, done);
+		    users.saveOAuthUserProfile(req, providerUserProfile, done);
 	}));
 };
