@@ -1,7 +1,9 @@
 {
-	"name": "MEAN",
-	"version": "0.0.1",
-	"dependencies": {
-		"angular": "~1.2"
-	 }
+  "name": "MEAN",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2",
+    "bootstrap": "~3.3.6",
+    "angular-ui-router": "~0.2.15"
+  }
 }

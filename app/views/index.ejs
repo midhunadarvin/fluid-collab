@@ -1,18 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:ng="http://angularjs.org">
 	<head>
 		<title><%= title %></title>
+		<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css">
 	</head>
 	<body>
-		<img src="img/logo.png" alt="Logo">
-		<h1><%= title %></h1>
 
-		<% if ( userFullName ) { %>
-			<h2>Hello <%=userFullName%> </h2>
-			<a href="/signout">Sign out</a>
-		<% } else { %>
-			<a href="/signup">Signup</a>
-			<a href="/signin">Signin</a>
-		<% } %>
+	<!-- NAVIGATION -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	    <div class="navbar-header">
+	        <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	        <li><a ui-sref="index">Home</a></li>
+	        <li><a ui-sref="about">About</a></li>
+	    </ul>
+	</nav>
+
+	<h1><%= title %></h1>
+
+	<% if (user) { %>
+		<a href="/signout">Sign out</a>
+ <% } else { %>
+		<a href="/signup">Signup</a>
+		<a href="/signin">Signin</a>
+ <% } %>
+
+ 	<script type="text/javascript">
+		window.user = <%- user || 'null' %>;
+	</script>
+
+	<section ui-view></section>
+
+
+	<!-- Script Files -->
+	<script src="/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+	<script src="/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/lib/angular/angular.js" type="text/javascript" ></script>
+	<script src="/lib/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
+
+	<!-- User module scripts -->
+	<script type="text/javascript" src="/user/user.client.module.js"></script>
+	<script type="text/javascript" src="/user/services/authentication.client.service.js"></script>
+
+	<!-- Example module scripts -->
+	<script type="text/javascript" src="/example/example.client.module.js"></script>
+	<script type="text/javascript" src="/example/controllers/example.client.controller.js"></script>
+	<script type="text/javascript" src="/example/config/example.client.routes.js"></script>
+
+	<!-- Main module scripts -->
+	<script type="text/javascript" src="/application.js"></script>
+
 	</body>
 </html>

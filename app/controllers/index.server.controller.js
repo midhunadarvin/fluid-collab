@@ -11,6 +11,6 @@ exports.render = function(req, res) {
 	res.render('index', 
 		{
 			title: 'Under maintenance : Sorry for the inconvenience.',
-			userFullName: req.user ? req.user.fullName : ''
+			user: JSON.stringify(req.user)
 		});
 };
