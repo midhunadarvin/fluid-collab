@@ -11,6 +11,14 @@ html {
 
 body {
   font-family: 'Titillium Web', sans-serif;
+background: rgba(148,235,231,1);
+background: -moz-radial-gradient(center, ellipse cover, rgba(148,235,231,1) 0%, rgba(148,235,231,1) 15%, rgba(1,122,183,1) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(148,235,231,1)), color-stop(15%, rgba(148,235,231,1)), color-stop(100%, rgba(1,122,183,1)));
+background: -webkit-radial-gradient(center, ellipse cover, rgba(148,235,231,1) 0%, rgba(148,235,231,1) 15%, rgba(1,122,183,1) 100%);
+background: -o-radial-gradient(center, ellipse cover, rgba(148,235,231,1) 0%, rgba(148,235,231,1) 15%, rgba(1,122,183,1) 100%);
+background: -ms-radial-gradient(center, ellipse cover, rgba(148,235,231,1) 0%, rgba(148,235,231,1) 15%, rgba(1,122,183,1) 100%);
+background: radial-gradient(ellipse at center, rgba(148,235,231,1) 0%, rgba(148,235,231,1) 15%, rgba(1,122,183,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#94ebe7', endColorstr='#017ab7', GradientType=1 );
 }
 
 a {
