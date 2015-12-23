@@ -1,8 +1,8 @@
 <div id="login-form" class="form">
       
       <ul class="tab-group">
-        <li ng-class="{'active' : isActive}" ng-click="toggleActive()"><a ui-sref=".signup">Sign Up</a></li>
-        <li ng-class="{'active' : !isActive}" ng-click="toggleActive()"><a ui-sref=".signin">Log In</a></li>
+        <li ng-class="{'active' : isActive}" ng-click="isActive = true"><a ui-sref=".signup">Sign Up</a></li>
+        <li ng-class="{'active' : !isActive}" ng-click="isActive = false"><a ui-sref=".signin">Log In</a></li>
       </ul>
       
       <div class="tab-content">

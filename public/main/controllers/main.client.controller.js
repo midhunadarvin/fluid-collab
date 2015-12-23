@@ -8,8 +8,4 @@ angular.module('main')
 
 .controller('loginformController', ['$scope', function($scope){
 	$scope.isActive = true;
-	$scope.toggleActive = function(){
-		$scope.isActive = !$scope.isActive;
-	};
-
 }]);
