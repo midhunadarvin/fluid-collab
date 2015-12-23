@@ -5,16 +5,20 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>First Name</label>
-          <input required name="name" ng-model="signupForm.firstname" />
-            <div ng-message="required">This is required.</div>
+          <input required name="fname" ng-model="signupForm.firstname" />
+          <div ng-messages="signupForm.firstname.$error">
+            <div ng-message-exp="['required']">
+              This is required.
+            </div>
+          </div>
         </md-input-container>
         <div flex="5" hide-xs hide-sm>
           <!-- Spacer //-->
         </div>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Last Name</label>
-          <input name="social" ng-model="signupForm.lastname" />
-          <div ng-messages="signupForm.social.$error" ng-show="signupForm.lastname.$dirty">
+          <input required name="lname" ng-model="signupForm.lastname" />
+          <div ng-messages="signupForm.lastname.$error">
             <div ng-message="pattern">This is required.</div>
           </div>
         </md-input-container>
@@ -23,10 +27,10 @@
         <md-input-container class="md-block" flex-gt-sm>
           <label>Email</label>
           <input name="email" ng-model="signupForm.emailaddress"
-                 required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
-          <div ng-messages="signupForm.email.$error" ng-hide="showHints">
-            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-              Your email must be between 10 and 100 characters long and look like an e-mail address.
+                 required ng-pattern="/^.+@.+\..+$/" />
+          <div ng-messages="signupForm.email.$error">
+            <div ng-message-exp="['required', 'pattern']">
+              Must be a valid e-mail address.
             </div>
           </div>
         </md-input-container>
