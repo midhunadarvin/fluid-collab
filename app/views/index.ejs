@@ -5,20 +5,14 @@
 		<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" type="text/css" href="/lib/angular-material/angular-material.min.css">
+		<link rel="stylesheet" type="text/css" href="/lib/angular-material-icons/angular-material-icons.css">
 		<link rel="stylesheet" type="text/css" href="/main/css/main.client.css">
 	</head>
 	<body>
 
 	<div ng-include="'/main/views/main.client.navbar.html'" scope="" onload=""></div>
 
-
-	<div class="container">
-		<div class="row">
-		 	<div class="col-lg-12 text-center">
-				<h1><%= title %></h1>
-			</div>
-		</div>	
-	</div>
+	<md-content>
 
 
 	<section ui-view></section>
@@ -35,6 +29,9 @@
 	<!-- <div ng-include="'/example/views/loginform.client.view.html'" scope="" onload=""></div> -->
 
  	<% } %>
+
+ 	</md-content>
+
 
  	<script type="text/javascript">
 		window.user = <%- user || 'null' %>;
@@ -56,6 +53,7 @@
 
   	<!-- Angular Material Library -->
   	<script src="/lib/angular-material/angular-material.min.js"></script>
+  	<script src="/lib/angular-material-icons/angular-material-icons.min.js"></script>
 
 	<!-- User module scripts -->
 	<script type="text/javascript" src="/user/user.client.module.js"></script>
