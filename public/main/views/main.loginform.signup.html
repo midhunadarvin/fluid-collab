@@ -1,6 +1,16 @@
 <div id="signup">   
-          <h1>Sign Up for Free</h1>
-          
+  <h1>Sign Up for Free</h1>
+   <div layout="row">
+      <a href="/oauth/facebook" class="icon-container">
+          <img id="fb_icon" class="svg" src="main/img/round-facebook.svg"/>
+      </a>  
+      <a href="/oauth/twitter" class="icon-container">
+          <img id="twitter_icon" src="main/img/round-twitter.svg"/>
+      </a>  
+      <a href="/oauth/google" class="icon-container">
+          <img id="google_icon" src="main/img/round-google-plus.svg"/>
+      </a>  
+    </div>
   <form name="signupForm" action="/" method="post">
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
@@ -38,8 +48,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Password</label>
-          <input name="password" ng-model="signupForm.passwd"
-                 required minlength="8"/>
+          <input name="password" type="password" ng-model="signupForm.passwd" required minlength="8"/>
           <div ng-messages="signupForm.password.$error">
             <div ng-message-exp="['required', 'minlength']">
               Password must be atleast 8 characters.
@@ -48,27 +57,6 @@
         </md-input-container>
       </div>
           
-<!--           <div class="top-row">
-            <div class="field-wrap">
-              <input type="text" placeholder="First Name *" required autocomplete="off" />
-            </div>
-        
-            <div class="field-wrap">
-              <input type="text"  placeholder="Last Name *" required autocomplete="off"/>
-            </div>
-          </div>
-
-          <div class="field-wrap">
-          
-            <input type="email" placeholder="Email *" required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <input type="password" placeholder="Set a password *" required autocomplete="off"/>
-          </div> -->
-          
-          <button type="submit" class="button button-block">Get Started</button>
-          
-          </form>
-
-        </div>
+      <md-button type="submit" class="button button-block md-raised md-primary">Get Started</md-button> 
+  </form>
+</div>

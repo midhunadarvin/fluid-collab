@@ -1,36 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:ng="http://angularjs.org">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:ng="http://angularjs.org"> <!--<![endif]-->
+
 	<head>
+	 	<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title><%= title %></title>
-		<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+		<meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" type="text/css" href="/lib/angular-material/angular-material.min.css">
 		<link rel="stylesheet" type="text/css" href="/lib/angular-material-icons/angular-material-icons.css">
 		<link rel="stylesheet" type="text/css" href="/main/css/main.client.css">
+
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	</head>
 	<body>
+	 <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!-- Add your site or application content here -->
 
 	<div ng-include="'/main/views/main.client.navbar.html'" scope="" onload=""></div>
 
-	<md-content>
+	<div flex layout="column">
+ 		<md-content flex>
+ 			<section ui-view></section>
+ 			<% if (user) { %>
 
+				<a href="/signout">Sign out</a>
 
-	<section ui-view></section>
-
-
-	<% if (user) { %>
-
-	<a href="/signout">Sign out</a>
-
- 	<% } else { %>
-		<!-- <a href="/signup">Signup</a>
-		<a href="/signin">Signin</a> -->
-
-	<!-- <div ng-include="'/example/views/loginform.client.view.html'" scope="" onload=""></div> -->
-
- 	<% } %>
-
- 	</md-content>
+		 	<% } else { %>
+				<!-- <a href="/signup">Signup</a>
+				<a href="/signin">Signin</a> -->
+				<!-- <div ng-include="'/example/views/loginform.client.view.html'" scope="" onload=""></div> -->
+		 	<% } %>
+ 		</md-content>
+	</div>
 
 
  	<script type="text/javascript">
@@ -66,6 +77,6 @@
 
 	<!-- Main module scripts -->
 	<script type="text/javascript" src="/application.js"></script>
-
+	<!-- <a href='http://www.freepik.com/free-vector/colored-social-media-icons_821847.htm'>Designed by Freepik</a> -->
 	</body>
 </html>

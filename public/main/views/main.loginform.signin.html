@@ -1,6 +1,17 @@
- <div id="login">   
+ <div id="signin">   
     
     <h1>Welcome Back!</h1>
+    <div layout="row">
+      <a href="/oauth/facebook" class="icon-container">
+          <img id="fb_icon" class="svg" src="main/img/round-facebook.svg"/>
+      </a>  
+      <a href="/oauth/twitter" class="icon-container">
+          <img id="twitter_icon" src="main/img/round-twitter.svg"/>
+      </a>  
+      <a href="/oauth/google" class="icon-container">
+          <img id="google_icon" src="main/img/round-google-plus.svg"/>
+      </a>  
+    </div>
           
     <form name="signinform" action="/" method="post">
           
@@ -22,8 +33,6 @@
      
           
       <p class="forgot"><a href="#">Forgot Password?</a></p>   
-      <button class="button button-block">Log In</button>
-          
+      <md-button class="button button-block md-raised md-primary">Log In</md-button>         
     </form>
-
 </div>

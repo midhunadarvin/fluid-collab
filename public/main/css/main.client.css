@@ -12,6 +12,9 @@ html {
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction:column;
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -45,6 +48,21 @@ a:hover {
   margin: 40px auto;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+#signup form{
+  padding-top: 40px;
+}
+
+#signin form{
+  padding-top: 40px;
+}
+.icon-container{
+  margin: 9%;
+}
+
+.icon-container img{
+  width: 100%;
 }
 
 .tab-group {
@@ -169,14 +187,9 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #2196F3;
-  color: #ffffff;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
-}
-.button:hover, .button:focus {
-  background: #1976D2;
 }
 
 .button-block {
