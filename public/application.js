@@ -2,7 +2,7 @@
 var mainApplicationModuleName = 'FluidCollab';
 
 // We will add the any dependencies to the application
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ui.router', 'ngMdIcons','ngMaterial' ,'main','users']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ui.router', 'ngMdIcons','ngMaterial' ,'main','users','home']);
 
 mainApplicationModule.config(['$locationProvider',function($locationProvider) {
 		$locationProvider.hashPrefix('!');

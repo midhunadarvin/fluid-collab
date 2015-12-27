@@ -16,6 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="/lib/angular-material/angular-material.min.css">
 		<link rel="stylesheet" type="text/css" href="/lib/angular-material-icons/angular-material-icons.css">
 		<link rel="stylesheet" type="text/css" href="/main/css/main.client.css">
+		<link rel="stylesheet" type="text/css" href="/home/css/home.client.css">
 
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	</head>
@@ -26,11 +27,10 @@
 
     <!-- Add your site or application content here -->
 
-	<div ng-include="'/main/views/main.client.navbar.html'" scope="" onload=""></div>
 
-	<div flex layout="column">
- 		<md-content flex>
  			<section ui-view></section>
+
+
  			<% if (user) { %>
 
 				<a href="/signout">Sign out</a>
@@ -40,8 +40,7 @@
 				<a href="/signin">Signin</a> -->
 				<!-- <div ng-include="'/example/views/loginform.client.view.html'" scope="" onload=""></div> -->
 		 	<% } %>
- 		</md-content>
-	</div>
+
 
 
  	<script type="text/javascript">
@@ -75,7 +74,12 @@
 	<script type="text/javascript" src="/main/controllers/main.client.controller.js"></script>
 	<script type="text/javascript" src="/main/config/main.client.routes.js"></script>
 
-	<!-- Main module scripts -->
+	<!-- Home module scripts -->
+	<script type="text/javascript" src="/home/home.client.module.js"></script>
+	<script type="text/javascript" src="/home/controllers/home.client.controller.js"></script>
+	<script type="text/javascript" src="/home/config/home.client.routes.js"></script>
+
+	<!-- Main application script -->
 	<script type="text/javascript" src="/application.js"></script>
 	<!-- <a href='http://www.freepik.com/free-vector/colored-social-media-icons_821847.htm'>Designed by Freepik</a> -->
 	</body>
