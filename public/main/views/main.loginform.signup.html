@@ -11,11 +11,11 @@
           <img id="google_icon" src="main/img/round-google-plus.svg"/>
       </a>  
     </div>
-  <form name="signupForm" action="/" method="post">
+  <form name="signupForm" action="/signup" method="post">
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>First Name</label>
-          <input required name="fname" ng-model="signupForm.firstname" />
+          <input required name="firstName" ng-model="signupForm.firstname" />
           <div ng-messages="signupForm.firstname.$error">
             <div ng-message-exp="['required']">
               This is required.
@@ -27,9 +27,20 @@
         </div>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Last Name</label>
-          <input required name="lname" ng-model="signupForm.lastname" />
+          <input required name="lastName" ng-model="signupForm.lastname" />
           <div ng-messages="signupForm.lastname.$error">
             <div ng-message="pattern">This is required.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Username</label>
+          <input name="username" ng-model="signupForm.usrname" />
+          <div ng-messages="signupForm.email.$error">
+            <div ng-messages="signupForm.usrname.$error">
+              <div ng-message="pattern">This is required.</div>
+            </div>
           </div>
         </md-input-container>
       </div>
