@@ -75,6 +75,7 @@ UserSchema.statics.findUniqueUsername = function(username, suffix,callback) {
 	_this.findOne({ username: possibleUsername }, function(err, user) {
 		if (!err) {
 			if (!user) {
+				console.log("Possible username from provider : " + possibleUsername);
 				callback(possibleUsername);
 			} else {
 				return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);

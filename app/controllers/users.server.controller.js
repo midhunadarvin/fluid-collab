@@ -142,12 +142,14 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 				var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
 				User.findUniqueUsername(possibleUsername, null,	function(availableUsername) {
 					profile.username = availableUsername;
+					console.log("Profile username set :"+profile.username);
 					user = new User(profile);
 					user.save(function(err) {
 						if (err) {
 							 var message = getErrorMessage(err);
+							 console.log(message);
               				 req.flash('error', message);
-             				 return req.res.redirect('/signin'); //notice the use of req.res
+             				 return req.res.redirect('/#!/index/signin'); //notice the use of req.res
 						}
 						return done(err, user);
 					});

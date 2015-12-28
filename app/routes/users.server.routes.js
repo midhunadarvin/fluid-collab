@@ -26,25 +26,26 @@ module.exports = function(app) {
 	app.get('/signout', users.signout);
 
 	app.get('/oauth/facebook', passport.authenticate('facebook', {
-		failureRedirect: '/signin'
+		failureRedirect: '/#!/index/signin',
+		scope: [ 'email' ]
 	}));
 	
 	app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
-		failureRedirect: '/signin',
-		successRedirect: '/home'
+		failureRedirect: '/#!/index/signin',
+		successRedirect: '/#!/home'
 	}));
 
 	app.get('/oauth/twitter', passport.authenticate('twitter', {
-		failureRedirect: '/signin'
+		failureRedirect: '/#!/index/signin'
 	}));
 
 	app.get('/oauth/twitter/callback', passport.authenticate('twitter', {
-		failureRedirect: '/signin',
-		successRedirect: '/home'
+		failureRedirect: '/#!/index/signin',
+		successRedirect: '/#!/home'
 	}));
 
 	app.get('/oauth/google', passport.authenticate('google', {
-		failureRedirect: '/signin',
+		failureRedirect: '/#!/index/signin',
 		scope: [
 		'https://www.googleapis.com/auth/userinfo.profile',
 		'https://www.googleapis.com/auth/userinfo.email'
@@ -52,7 +53,7 @@ module.exports = function(app) {
 	}));
 	
 	app.get('/oauth/google/callback', passport.authenticate('google', {
-		failureRedirect: '/signin',
-		successRedirect: '/home'
+		failureRedirect: '/#!/index/signin',
+		successRedirect: '/#!/home'
 	}));
 };

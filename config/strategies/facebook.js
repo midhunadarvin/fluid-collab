@@ -10,18 +10,20 @@ module.exports = function() {
 			clientID: config.facebook.clientID,
 			clientSecret: config.facebook.clientSecret,
 			callbackURL: config.facebook.callbackURL,
+			profileFields: ['id', 'name', 'displayName','email'],
 			passReqToCallback: true
 		},
 		function(req, accessToken, refreshToken, profile, done) {
 			var providerData = profile._json;
 			providerData.accessToken = accessToken;
 			providerData.refreshToken = refreshToken;
+			console.log("Facebook received data :" + JSON.stringify(profile));
 			var providerUserProfile = {
 				firstName: profile.name.givenName,
 				lastName: profile.name.familyName,
 				fullName: profile.displayName,
-				email: profile.emails[0].value,
 				username: profile.username,
+				email: profile.emails[0].value,
 				provider: 'facebook',
 				providerId: profile.id,
 				providerData: providerData

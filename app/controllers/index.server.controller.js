@@ -14,12 +14,3 @@ exports.renderIndex = function(req, res) {
 			user: JSON.stringify(req.user)
 		});
 };
-
-exports.renderHome = function(req, res) {
-	
-	res.render('home', 
-		{
-			title: 'The home page',
-			user: JSON.stringify(req.user)
-		});
-};
