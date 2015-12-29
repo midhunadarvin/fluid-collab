@@ -40,3 +40,16 @@ md-sidenav ng-md-icon {
 .user-avatar {
   border-radius: 99%;
 }
+
+#search_toobar{
+  background-color: #fff;
+  color:#000;
+}
+
+#search_toobar md-input-container{
+  display: flex;
+}
+
+#search_toobar .md-button{
+  color:#000;
+}
