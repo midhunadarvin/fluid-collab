@@ -36,11 +36,11 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Username</label>
-          <input name="username" ng-model="signupForm.usrname" />
-          <div ng-messages="signupForm.email.$error">
-            <div ng-messages="signupForm.usrname.$error">
-              <div ng-message="pattern">This is required.</div>
-            </div>
+          <input required name="username" ng-model="signupForm.usrname" />
+          <div ng-messages="signupForm.username.$error">
+             <div ng-message-exp="['required']">
+              This is required.
+             </div>
           </div>
         </md-input-container>
       </div>

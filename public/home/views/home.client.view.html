@@ -1,3 +1,11 @@
-<h1>Home view</h1>
 
-<a href="/signout">Sign out</a>
+<div layout="column" class="relative" role="main">
+      <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+        <ng-md-icon icon="add"></ng-md-icon>
+      </md-button>
+
+      <div ng-include="'/home/views/home.client.navbar.html'" ></div>
+    
+      <md-content flex md-scroll-y>
+      </md-content>
+</div>
