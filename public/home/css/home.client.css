@@ -24,6 +24,10 @@ h2 {
   opacity: 0.8;
 }
 
+.md-button{
+  min-width: 20px;
+}
+
 md-toolbar:not(.md-hue-1),
 .md-fab {
   fill: #fff;
