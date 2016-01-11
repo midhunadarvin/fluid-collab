@@ -1,14 +1,21 @@
 
-<div class="wrap" layout="column" role="main">
-      <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
-        <ng-md-icon icon="add"></ng-md-icon>
-      </md-button>
+<div class="wrap" layout="row" role="main">
 
-      <!-- <div ng-include="'/home/views/home.client.toolbar.html'" ></div> -->
-      <toolbar></toolbar>
+ 	<sidebar></sidebar>
+
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+        <ng-md-icon icon="add"></ng-md-icon>
+    </md-button>
+
+    <!-- <div ng-include="'/home/views/home.client.toolbar.html'" ></div> -->
+    <div class="wrap" layout="column">
+
+    	<toolbar></toolbar>
     
-      <md-content flex="100" md-scroll-y>
-      	{{alert}}
-      	<a href="/signout">Logout</a>
-      </md-content>
+	    <md-content flex="100" md-scroll-y>
+	      	{{alert}}
+	      	<a href="/signout">Logout</a>
+	    </md-content>
+
+	</div>
 </div>

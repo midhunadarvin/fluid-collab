@@ -35,6 +35,7 @@ md-toolbar:not(.md-hue-1),
 
 md-sidenav {
   fill: #737373;
+  background-color: #fefefe;
 }
 md-sidenav ng-md-icon {
   position: relative;

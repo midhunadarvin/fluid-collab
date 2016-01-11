@@ -25,6 +25,7 @@ body {
 
 .wrap{
   height: 100%;
+  width: 100%;
 }
 
 a {
@@ -46,6 +47,10 @@ a:hover {
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #727272; }
 .divider-color         { border-color: #B6B6B6; }
+
+md-content{
+  background-color: #fff;
+}
 
 .toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
   color: white; }
