@@ -19,8 +19,12 @@ body {
   font-family: 'Titillium Web', sans-serif;
 }
 
-.fill{
+.fill_height{
   height: 100vh;
+}
+
+.fill_width{
+  height: 100vw;
 }
 
 .wrap{

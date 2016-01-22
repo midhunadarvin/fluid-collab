@@ -8,14 +8,6 @@ angular.module('home')
     return toolbar;
 })
 
-.directive('sidebar', function() {
-	var sidebar = {};
-	sidebar.restrict = 'E'; /* restrict this directive to elements */
-    sidebar.templateUrl = "/home/views/home.client.sidebar.html";
-    sidebar.controller = 'HomeController';
-    return sidebar;
-})
-
 .directive('userAvatar', function() {
   return {
     replace: true,

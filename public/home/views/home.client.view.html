@@ -1,7 +1,29 @@
 
-<div class="wrap" layout="row" role="main">
+<section class="fill_height" layout="row" flex="">
 
- 	<sidebar></sidebar>
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+     <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+      </md-toolbar>
+      <md-content layout-padding="">
+        <md-button ng-click="close()" class="md-primary" hide-gt-md="">
+          Close Sidenav Left
+        </md-button>
+        <md-list>
+            <md-item ng-repeat="item in menu">
+              <md-item-content md-ink-ripple layout="row" layout-align="start center">
+               
+                <div class="inset">
+                  <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                </div>
+                <div class="inset">{{item.title}}</div>
+                
+              </md-item-content>
+            </md-item>
+         </md-list>
+      </md-content>
+    </md-sidenav>
+   
 
     <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
         <ng-md-icon icon="add"></ng-md-icon>
@@ -18,4 +40,4 @@
 	    </md-content>
 
 	</div>
-</div>
+</section>

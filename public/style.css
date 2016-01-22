@@ -24,10 +24,6 @@ h2 {
   opacity: 0.8;
 }
 
-.md-button{
-  min-width: 20px;
-}
-
 md-toolbar:not(.md-hue-1),
 .md-fab {
   fill: #fff;
@@ -35,27 +31,12 @@ md-toolbar:not(.md-hue-1),
 
 md-sidenav {
   fill: #737373;
-  background-color: #fefefe;
 }
 md-sidenav ng-md-icon {
+  position: relative;
   top: 5px;
 }
-md-item-content{
-  position: relative;
-}
+
 .user-avatar {
   border-radius: 99%;
-}
-
-#search_toobar{
-  background-color: #fff;
-  color:#000;
-}
-
-#search_toobar md-input-container{
-  display: flex;
-}
-
-#search_toobar .md-button{
-  color:#000;
 }
