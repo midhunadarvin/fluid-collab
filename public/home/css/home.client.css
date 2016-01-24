@@ -33,6 +33,10 @@ md-toolbar:not(.md-hue-1),
   fill: #fff;
 }
 
+.md-subheader .md-subheader-inner{
+  padding:8px;
+}
+
 md-sidenav {
   fill: #737373;
   background-color: #fefefe;
@@ -58,4 +62,9 @@ md-item-content{
 
 #search_toobar .md-button{
   color:#000;
+}
+
+.vert_list md-item{
+  display: block;
+  position: relative;
 }
