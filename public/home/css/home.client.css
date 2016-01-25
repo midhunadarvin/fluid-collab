@@ -68,3 +68,7 @@ md-item-content{
   display: block;
   position: relative;
 }
+
+.background-grey{
+  background-color: #ddd;
+}
