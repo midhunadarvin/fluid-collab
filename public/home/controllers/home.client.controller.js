@@ -1,44 +1,75 @@
 angular.module('home')
-
 .controller('HomeController', ['$scope',
+                 '$location',
 							   'Authentication',
 							   '$mdBottomSheet',
 							   '$mdSidenav',
 							   '$mdDialog',
-							   function( $scope,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog ) {
+							   function( $scope,$location,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
 
+
+  // Bottom settings popup
 	$scope.showListBottomSheet = function($event) {
 
-	    $scope.alert = '';
-	    $mdBottomSheet.show({
+	  $scope.alert = '';
+	  $mdBottomSheet.show({
 	      templateUrl: '/home/views/home.client.bottomsheet.html',
 	      controller: 'HomeController',
 	      targetEvent: $event
-	    }).then(function(clickedItem) {
-	      $scope.alert = clickedItem.name + ' clicked!';
-	    });
+	  }).then(function(clickedItem) {
+        if(clickedItem.link){
+          $location.path(clickedItem.link);
+        }
+	  });
 
-  	};
+  };
 
-  	$scope.items = [
+  $scope.addProject = function(new_project){
+      $mdDialog.hide(new_project);
+  };
+
+  $scope.showAdd = function(ev) {
+      $mdDialog.show({
+        controller: 'HomeController',
+        templateUrl: '/home/views/dialogs/home.dialog.addProject.html',
+        targetEvent: ev,
+      })
+      .then(function(project) {
+        //$scope.alert = 'You said the information was "' + answer + '".';
+        $scope.projects.unshift(project);
+        $scope.$apply();
+      }, function() {
+        $scope.alert = 'You cancelled the dialog.';
+      });
+    };
+
+  $scope.hide = function() {
+    $mdDialog.hide();
+  };
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+
+  // Bottomsheet menu items
+  $scope.items = [
 	    { name: 'Share', icon: 'share' },
 	    { name: 'Upload', icon: 'upload' },
 	    { name: 'Copy', icon: 'copy' },
-	    { name: 'Print this page', icon: 'print' },
-  	];
+      { name: 'Log out', link: '/signout',icon: 'logout' },
+  ];
   
-  	$scope.listItemClick = function($index) {
+  $scope.listItemClick = function($index) {
 	    var clickedItem = $scope.items[$index];
 	    $mdBottomSheet.hide(clickedItem);
-  	};
+  };
 
-  	$scope.toggleSidenav = function(menuId) {
+  $scope.toggleSidenav = function(menuId) {
     	$mdSidenav(menuId).toggle();
-    };
+  };
 
-    $scope.menu = [
+  $scope.menu = [
     {
       link : '',
       title: 'Dashboard',
@@ -56,7 +87,7 @@ angular.module('home')
     }
   ];
 
-  $scope.admin = [
+  /*$scope.admin = [
     {
       link : '',
       title: 'Trash',
@@ -67,40 +98,40 @@ angular.module('home')
       title: 'Settings',
       icon: 'settings'
     }
+  ];*/
+
+
+  $scope.projects = [
+      {
+        title: 'Sample project 1',
+        client: 'Max',
+        time: '3:08PM',
+        leader: "Midhun"
+      },
+      {
+        title: 'Sample project 2',
+        client: 'Vinay',
+        time: '3:08PM',
+        leader: "Midhun"
+      },
+      {
+        title: 'Sample project 3',
+        client: 'Lisa',
+        time: '3:08PM',
+        leader: "Midhun"
+      },
+      {
+        title: 'Sample project 4',
+        client: 'SomeClient',
+        time: '3:08PM',
+        leader: "Midhun"
+      },
+      {
+        title: 'Sample project 5',
+        client: 'SomeClient',
+        time: '3:08PM',
+        leader: "Midhun"
+      }
   ];
-
-
-  	 $scope.activity = [
-      {
-        what: 'Brunch this weekend?',
-        who: 'Ali Conners',
-        when: '3:08PM',
-        notes: " I'll be in your neighborhood doing errands"
-      },
-      {
-        what: 'Summer BBQ',
-        who: 'to Alex, Scott, Jennifer',
-        when: '3:08PM',
-        notes: "Wish I could come out but I'm out of town this weekend"
-      },
-      {
-        what: 'Oui Oui',
-        who: 'Sandra Adams',
-        when: '3:08PM',
-        notes: "Do you have Paris recommendations? Have you ever been?"
-      },
-      {
-        what: 'Birthday Gift',
-        who: 'Trevor Hansen',
-        when: '3:08PM',
-        notes: "Have any ideas of what we should get Heidi for her birthday?"
-      },
-      {
-        what: 'Recipe to try',
-        who: 'Brian Holt',
-        when: '3:08PM',
-        notes: "We should eat this: Grapefruit, Squash, Corn, and Tomatillo tacos"
-      },
-    ];
 	
 }]);

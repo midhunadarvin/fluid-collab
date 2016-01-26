@@ -35,9 +35,7 @@
     	<toolbar></toolbar>
     
 	    <md-content class="background-grey" flex="100" md-scroll-y>
-	      	{{alert}}
-	      	<a href="/signout">Logout</a><br/>
-
+          {{alert}}
           <ui-view layout="column" layout-fill layout-padding>
           <div class="inset" hide-sm></div>
             <ng-switch on="data.selectedIndex" class="tabpanel-container">
@@ -48,20 +46,20 @@
                    md-swipe-left="next()"
                    md-swipe-right="previous()"
                    layout="row" layout-align="center center">
-                  <md-card flex-gt-sm="90" flex-gt-md="80">
+                  <md-card flex flex-gt-sm="90" flex-gt-md="80">
                     <md-card-content>
-                      <h2>Activity</h2>
+                      <h2>Projects</h2>
                       <md-list>
-                        <md-item ng-repeat="item in activity | filter:search">
+                        <md-item ng-repeat="project in projects | filter:search">
                           <md-item-content layout="row">
-                            <div class="md-tile-left inset" hide-sm layout="column" layout-align="center">
+                            <div class="md-tile-left inset" layout="column" layout-align="center">
                                 <user-avatar></user-avatar>
                             </div>
                             <div class="md-tile-content" layout="column" flex>
-                              <h3>{{item.what}}</h3>
-                              <h4>{{item.who}}</h4>
+                              <h3>{{project.title}}</h3>
+                              <h4>Client : {{project.client}}</h4>
                               <p>
-                                {{item.notes}}
+                                Leader : {{project.leader}}
                               </p>
                             </div>
                           </md-item-content>
@@ -85,20 +83,20 @@
                    md-swipe-left="next()"
                    md-swipe-right="previous()" 
                    layout="row" layout-align="center center">
-                  <md-card flex-gt-sm="90" flex-gt-md="80">
+                  <md-card flex flex-gt-sm="90" flex-gt-md="80">
                     <md-card-content>
                       <h2>Favorites</h2>
                       <md-list>
-                        <md-item ng-repeat="item in activity | filter:search | orderBy:'-what'">
+                        <md-item ng-repeat="project in projects | filter:search | orderBy:'-name'">
                            <md-item-content layout="row">
                             <div class="md-tile-left inset" hide-sm layout="column" layout-align="center">
                                 <user-avatar></user-avatar>
                             </div>
                             <div class="md-tile-content" layout="column" flex>
-                              <h3>{{item.what}}</h3>
-                              <h4>{{item.who}}</h4>
+                              <h3>{{project.title}}</h3>
+                              <h4>Client : {{project.client}}</h4>
                               <p>
-                                {{item.notes}}
+                                Leader : {{project.leader}}
                               </p>
                             </div>
                           </md-item-content>

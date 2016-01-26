@@ -1,0 +1,38 @@
+<md-dialog aria-label="Mango (Fruit)"> 
+	<md-content class="md-padding"> 
+		<form class="inset" name="projectForm">
+			<div layout layout-sm="column" layout-xs="column"> 
+				<md-input-container flex> 
+					<label>Title</label> 
+					<input ng-model="new_project.title"> 
+				</md-input-container> 
+				<md-input-container flex> 
+					<label>Client</label> 
+					<input ng-model="new_project.client"> 
+				</md-input-container> 
+			</div> 
+			<div layout="row">
+				<md-input-container flex> 
+					<label>Leader</label> <input ng-model="new_project.leader">
+				</md-input-container> 
+			</div>
+			<div layout layout-xs="column" layout-sm="column"> 
+				<md-input-container flex> 
+					<label>Status</label> <input ng-model="new_project.status"> 
+				</md-input-container> 
+				<md-input-container flex> 
+					<label>Assignees</label> <input ng-model="new_project.assignees"> 
+				</md-input-container>  
+			</div> 
+			<md-input-container flex> 
+				<label>Summary</label> 
+				<textarea ng-model="new_project.summary" columns="1" md-maxlength="150"></textarea> 
+			</md-input-container> 
+		</form> 
+	</md-content> 
+	<div class="md-actions" layout="row"> 
+		<span flex></span> 
+		<md-button ng-click="hide()"> Cancel </md-button> 
+		<md-button ng-click="addProject(new_project)" class="md-primary"> Save </md-button> 
+	</div>
+</md-dialog>
