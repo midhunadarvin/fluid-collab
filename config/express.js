@@ -40,6 +40,7 @@ module.exports = function() {
 
 	require('../app/routes/index.server.routes.js')(app);		// Set routes configuration for index
 	require('../app/routes/users.server.routes.js')(app);
+	require('../app/routes/projects.server.routes.js')(app);
     
     // Folder for serving static files comes after routes config.
     // Express would first try to look for HTTP request paths in the static files folder.

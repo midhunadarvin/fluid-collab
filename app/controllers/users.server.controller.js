@@ -1,5 +1,11 @@
 var User = require('mongoose').model('User');
 
+exports.requiresLogin = function(req, res, next) {
+	if (!req.isAuthenticated()) {
+		return res.status(401).send({ message: 'User is not logged in' });
+	}
+	next();
+};
 
 exports.create = function(req, res, next) {
 
