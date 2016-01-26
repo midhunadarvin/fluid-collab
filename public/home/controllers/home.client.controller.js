@@ -38,8 +38,9 @@ angular.module('home')
       })
       .then(function(project) {
         //$scope.alert = 'You said the information was "' + answer + '".';
-        $scope.projects.unshift(project);
-        $scope.$apply();
+        if(project)
+          $scope.projects.unshift(project);
+        //$scope.$apply();
       }, function() {
         $scope.alert = 'You cancelled the dialog.';
       });

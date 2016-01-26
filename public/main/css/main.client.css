@@ -158,7 +158,7 @@ label.highlight {
   color: #ffffff;
 }
 
-#login-form input, textarea {
+#login-form input,#login-form textarea {
   font-size: 22px;
   display: block;
   width: 100%;
