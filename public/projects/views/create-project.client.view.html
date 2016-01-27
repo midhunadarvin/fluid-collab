@@ -1,0 +1,23 @@
+<section data-ng-controller="ProjectsController">
+	<h1>New Article</h1>
+	<form data-ng-submit="create()" novalidate>
+		<div>
+			<label for="title">Title</label>
+			<div>
+				<input type="text" data-ng-model="title" id="title" placeholder="Title" required>
+			</div>
+		</div>
+	<div>
+		<label for="summary">Summary</label>
+		<div>
+			<textarea data-ng-model="summary" id="summary" cols="30" rows="10" placeholder="Summary"></textarea>
+		</div>
+	</div>
+	<div>
+		<input type="submit">
+	</div>
+	<div data-ng-show="error">
+		<strong data-ng-bind="error"></strong>
+	</div>
+</form>
+</section>
