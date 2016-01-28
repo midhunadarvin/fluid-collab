@@ -1,0 +1,19 @@
+<section data-ng-controller="projectsController" data-ng-
+init="find()">
+<h1>Projects</h1>
+<ul>
+<li data-ng-repeat="project in projects">
+<a data-ng-href="#!/projects/{{project._id}}" data-ng-
+bind="project.title"></a>
+<br>
+<small data-ng-bind="project.created | date:'medium'"></small>
+<small>/</small>
+<small data-ng-bind="project.creator.fullName"></small>
+<p data-ng-bind="project.summary"></p>
+</li>
+</ul>
+<div data-ng-hide="!projects || projects.length">
+No projects yet, why don't you <a href="/#!/projects/
+create">create one</a>?
+</div>
+</section>

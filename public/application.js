@@ -5,6 +5,7 @@ var mainApplicationModuleName = 'FluidCollab';
 var mainApplicationModule = angular.module(mainApplicationModuleName, [ 'ui.router', 
 																		'ngMdIcons',
 																		'ngMaterial',
+																		'ngResource',
 																		'main',
 																		'users',
 																		'projects',

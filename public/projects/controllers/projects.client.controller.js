@@ -1,10 +1,10 @@
-angular.module('pojects')
+angular.module('projects')
 .controller('ProjectsController', [ '$scope',
-								    '$routeParams', 
+								    '$stateParams', 
 									'$location', 
 									'Authentication', 
 									'Projects',
-	function($scope, $routeParams, $location, Authentication, Projects){
+	function($scope, $stateParams, $location, Authentication, Projects){
 
 		$scope.authentication = Authentication;
 
@@ -22,29 +22,29 @@ angular.module('pojects')
 		};
 
 		$scope.findOne = function() {
-			$scope.project = Projects.get({ projectId: $routeParams.projectId });
+			$scope.project = Projects.get({ projectId: $stateParams.projectId });
 		};
 
 		$scope.update = function() {
-			$scope.article.$update(function() {
+			$scope.project.$update(function() {
 					$location.path('projects/' + $scope.project._id);
 			}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 			});
 		};
 
-		$scope.delete = function(article) {
-			if (article) {
-				article.$remove(function() {
-					for (var i in $scope.articles) {
-						if ($scope.articles[i] === article) {
-							$scope.articles.splice(i, 1);
+		$scope.delete = function(project) {
+			if (project) {
+				project.$remove(function() {
+					for (var i in $scope.projects) {
+						if ($scope.projects[i] === project) {
+							$scope.projects.splice(i, 1);
 						}
 					}
 				});
 			} else {
-				$scope.article.$remove(function() {
-					$location.path('articles');
+				$scope.project.$remove(function() {
+					$location.path('projects');
 				});
 			}
 		};
