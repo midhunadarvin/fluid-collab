@@ -1,17 +1,9 @@
-<section data-ng-controller="ProjectsController" data-ng-
-init="findOne()">
+<section data-ng-controller="ProjectsController" ng-init="findOne()">
 <h1>Edit Project</h1>
 <form data-ng-submit="update()" novalidate>
-<div>
-<label for="title">Title</label>
-<div>
-<input type="text" data-ng-model="project.title" id="title"
-placeholder="Title" required>
+<input type="text" ng-model="project.title" id="title" placeholder="Title" required>
 </div>
 </div>
-<div>
-<label for="summary">Summary</label>
-<div>
 <textarea data-ng-model="project.summary" id="summary"
 cols="30" rows="10" placeholder="Summary"></textarea>
 </div>

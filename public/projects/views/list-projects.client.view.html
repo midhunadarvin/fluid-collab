@@ -1,10 +1,8 @@
-<section data-ng-controller="projectsController" data-ng-
-init="find()">
+<section data-ng-controller="ProjectsController" ng-init="find()">
 <h1>Projects</h1>
 <ul>
 <li data-ng-repeat="project in projects">
-<a data-ng-href="#!/projects/{{project._id}}" data-ng-
-bind="project.title"></a>
+<a data-ng-href="#!/projects/{{project._id}}" ng-bind="project.title"></a>
 <br>
 <small data-ng-bind="project.created | date:'medium'"></small>
 <small>/</small>
@@ -13,7 +11,6 @@ bind="project.title"></a>
 </li>
 </ul>
 <div data-ng-hide="!projects || projects.length">
-No projects yet, why don't you <a href="/#!/projects/
-create">create one</a>?
+No projects yet, why don't you <a href="/#!/projects/create">create one</a>?
 </div>
 </section>

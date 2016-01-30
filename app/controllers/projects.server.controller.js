@@ -3,7 +3,7 @@ var Project = mongoose.model('Project');
 
 // Check if the current user has authorization to make changes
 exports.hasAuthorization = function(req, res, next) {
-	if (req.article.creator.id !== req.user.id) {
+	if (req.project.creator.id !== req.user.id) {
 		return res.status(403).send({ message: 'User is not authorized' });
 	}
 	next();
@@ -66,11 +66,11 @@ exports.update = function(req, res, next) {
 
 	project.summary = req.body.summary;
 
-	Project.save(function(err) {
+	project.save(function(err) {
 		if (err) {
 			return res.status(400).send({ message: getErrorMessage(err)	});
 		} else {
-			res.json(article);
+			res.json(project);
 		}
 	});
 
