@@ -1,6 +1,6 @@
 <section ng-controller="ProjectsController" ng-init="findOne()">
 <h1 ng-bind="project.title"></h1>
-<div data-ng-show="authentication.user._id == project.creator._id">
+<div ng-show="authentication.user._id == project.creator._id">
 <a href="/#!/projects/{{project._id}}/edit">edit</a>
 <a href="#" ng-click="delete();">delete</a>
 </div>
@@ -8,7 +8,7 @@
 <em>Posted on</em>
 <em ng-bind="project.created | date:'mediumDate'"></em>
 <em>by</em>
-<em data-ng-bind="project.creator.fullName"></em>
+<em ng-bind="project.creator.fullName"></em>
 </small>
-<p data-ng-bind="project.summary"></p>
+<p ng-bind="project.summary"></p>
 </section>
