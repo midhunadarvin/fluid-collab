@@ -1,23 +1,24 @@
 var User = require('mongoose').model('User');
 
+// All requests with userId route param will pass through this middleware
+exports.userByID = function(req, res, next, id) {
+
+	User.findOne({_id: id }, function(err, user) {
+		if (err) {
+			return next(err);
+		} else {
+			req.user = user;
+			next();
+		}
+	});
+
+};
+
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({ message: 'User is not logged in' });
 	}
 	next();
-};
-
-exports.create = function(req, res, next) {
-
-	var user = new User(req.body);
-
-	user.save(function(err) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json(user);
-		}
-	});
 };
 
 exports.list = function(req, res, next) {
@@ -34,19 +35,6 @@ exports.list = function(req, res, next) {
 exports.read = function(req, res) {
 
 	res.json(req.user);
-
-};
-
-exports.userByID = function(req, res, next, id) {
-
-	User.findOne({_id: id }, function(err, user) {
-		if (err) {
-			return next(err);
-		} else {
-			req.user = user;
-			next();
-		}
-	});
 
 };
 
@@ -129,14 +117,22 @@ exports.signup = function(req, res, next) {						// To register a user
 
 			req.login(user, function(err) {						// Login method of Passport module
 				if (err) 
-					return next(err);
-				return res.redirect('/');
+					return res.json(err);;
+				return res.json(user);
 
 			});
 		});
 	} else {
 		return res.redirect('/');
 	}
+};
+
+exports.login = function(req, res) {						// To login a user
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.json({message:"success",user:req.user});
+    //res.redirect('/users/' + req.user.username);
+
 };
 
 exports.saveOAuthUserProfile = function(req, profile, done) {

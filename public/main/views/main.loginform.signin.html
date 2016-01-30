@@ -13,11 +13,11 @@
       </a>  
     </div>
           
-    <form name="signinform" action="/signin" method="post">
+    <form name="signinform" ng-submit="login(oldUser)">
           
       <md-input-container class="md-block">
         <label>Username or Email</label>
-        <input required name="username" ng-model="signinform.user" type="">
+        <input required name="username" ng-model="oldUser.username" type="">
         <div ng-messages="signinform.description.$error">
           <div ng-message="required">This is required.</div>
         </div>
@@ -25,7 +25,7 @@
 
       <md-input-container class="md-block">
         <label>Password</label>
-        <input required name="password" ng-model="signinform.passwd" type="password">
+        <input required name="password" ng-model="oldUser.password" type="password">
         <div ng-messages="signinform.description.$error">
           <div ng-message="required">This is required.</div>
         </div>

@@ -11,11 +11,11 @@
           <img id="google_icon" src="main/img/round-google-plus.svg"/>
       </a>  
     </div>
-  <form name="signupForm" action="/signup" method="post">
+  <form name="signupForm" ng-submit="signup(newUser)">
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>First Name</label>
-          <input required name="firstName" ng-model="signupForm.firstname" />
+          <input required name="firstName" ng-model="newUser.firstName" />
           <div ng-messages="signupForm.firstname.$error">
             <div ng-message-exp="['required']">
               This is required.
@@ -27,7 +27,7 @@
         </div>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Last Name</label>
-          <input required name="lastName" ng-model="signupForm.lastname" />
+          <input required name="lastName" ng-model="newUser.lastName" />
           <div ng-messages="signupForm.lastname.$error">
             <div ng-message="pattern">This is required.</div>
           </div>
@@ -36,7 +36,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Username</label>
-          <input required name="username" ng-model="signupForm.usrname" />
+          <input required name="username" ng-model="newUser.username" />
           <div ng-messages="signupForm.username.$error">
              <div ng-message-exp="['required']">
               This is required.
@@ -47,7 +47,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Email</label>
-          <input name="email" ng-model="signupForm.emailaddress"
+          <input name="email" ng-model="newUser.email"
                  required ng-pattern="/^.+@.+\..+$/" />
           <div ng-messages="signupForm.email.$error">
             <div ng-message-exp="['required', 'pattern']">
@@ -59,7 +59,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Password</label>
-          <input name="password" type="password" ng-model="signupForm.passwd" required minlength="8"/>
+          <input name="password" type="password" ng-model="newUser.password" required minlength="8"/>
           <div ng-messages="signupForm.password.$error">
             <div ng-message-exp="['required', 'minlength']">
               Password must be atleast 8 characters.
@@ -68,6 +68,6 @@
         </md-input-container>
       </div>
           
-      <md-button type="submit" class="button button-block md-raised md-primary">Get Started</md-button> 
+      <md-button type="submit" class="button fill_width md-raised md-primary">Get Started</md-button> 
   </form>
 </div>

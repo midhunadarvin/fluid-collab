@@ -5,7 +5,7 @@ var users = require('../../app/controllers/users.server.controller'),
 module.exports = function(app) {
 	
 	app.route('/api/users')
-		.post(users.create)
+		.post(users.signup)
 		.get(users.list);
 
 	app.route('/api/users/:userId')					
@@ -15,17 +15,13 @@ module.exports = function(app) {
 	
 	app.param('userId', users.userByID);
 
-	app.route('/signup')
+	app.route('/api/signup')
 		.get(users.renderSignup)
 		.post(users.signup);
 
-	app.route('/signin')
+	app.route('/api/login')
 		.get(users.renderSignin)
-		.post(passport.authenticate('local', { 
-			successRedirect: '/#!/home', 
-			failureRedirect: '/#!/signin', 
-			failureFlash: true 
-		}));
+		.post(passport.authenticate('local'),users.login);
 
 	app.get('/signout', users.signout);
 

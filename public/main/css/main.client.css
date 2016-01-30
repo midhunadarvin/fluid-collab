@@ -20,11 +20,11 @@ body {
 }
 
 .fill_height{
-  height: 100vh;
+  height: 100%;
 }
 
 .fill_width{
-  height: 100vw;
+  width: 100%;
 }
 
 .wrap{

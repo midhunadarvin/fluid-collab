@@ -11,7 +11,7 @@ angular.module('projects')
 		$scope.create = function() {
 			var project = new Projects({ title: this.title, summary: this.summary });
 			project.$save(function(response) {
-				$location.path('projects/' + response._id);
+				$location.path('home');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

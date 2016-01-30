@@ -8,7 +8,7 @@ angular.module('main').config(function($stateProvider,$urlRouterProvider) {
         .state('index', {
             url: '/index',
             templateUrl: 'main/views/main.client.loginform.html',
-            controller: 'loginformController'
+            controller: 'loginformController as loginCtrl'
         })
         .state('index.signup', {  
             url: '/signup',
