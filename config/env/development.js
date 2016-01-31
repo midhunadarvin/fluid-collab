@@ -1,7 +1,8 @@
 module.exports = {
 	// Development configuration options
-    db: 'mongodb://localhost/fluid-collab',
-	sessionSecret: 'developmentSessionSecret',
+    db: 'mongodb://localhost/fluid-collab',			// MongoDB url
+    secret: 'developmentsecret',					// used when we create and verify JSON Web Tokens
+	sessionSecret: 'developmentSessionSecret',		
 	facebook: {
 		clientID: '543944445782787',
 		clientSecret: '4a30896f66f736fdfe070ce21aa5de22',

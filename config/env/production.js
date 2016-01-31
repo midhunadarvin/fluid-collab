@@ -1,6 +1,7 @@
 module.exports = {
 	// Production configuration options
 	db: 'mongodb://root:password@ds061464.mongolab.com:61464/fluid-collab',
+	secret: 'productionsecret',							// used when we create and verify JSON Web Tokens
 	sessionSecret: 'productionSessionSecret',
 	facebook: {
 		clientID: '543944445782787',

@@ -31,6 +31,8 @@ module.exports = function() {
 		secret: config.sessionSecret
 	}));
 
+	app.set('JWTSecret', config.secret); 						// secret variable
+
 	app.use(flash());
 	app.use(passport.initialize());								// Registering passport in express application
     app.use(passport.session());

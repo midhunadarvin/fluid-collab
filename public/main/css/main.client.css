@@ -5,6 +5,8 @@
   box-sizing: border-box;
 }
 
+:focus {outline:none;}
+
 html {
   overflow-y: scroll;
   height: auto;

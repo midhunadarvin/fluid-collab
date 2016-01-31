@@ -9,7 +9,9 @@ angular.module('home')
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
 
-
+  $scope.dashboardInit = function(){
+      $scope.user = Authentication.user;
+  }
   // Bottom settings popup
 	$scope.showListBottomSheet = function($event) {
 

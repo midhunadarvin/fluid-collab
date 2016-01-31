@@ -1,13 +1,13 @@
-<md-bottom-sheet layout="column" class="md-list md-has-header"> 
+<md-bottom-sheet class="md-list md-has-header"> 
 	<md-subheader>Settings</md-subheader> 
-	<md-list class="vert_list"> 
-		<md-item md-ink-ripple class="inset" ng-repeat="item in items" ng-click="listItemClick($index)">
+	<md-list> 
+		<md-list-item md-ink-ripple class="inset" ng-repeat="item in items" ng-click="listItemClick($index)">
 			<md-item-content  > 
 				<span flex aria-label="{{item.name}}" > 
 					<span class="md-inline-list-icon-label">{{ item.name }}</span> 
 				</span>
 			</md-item-content> 
-		</md-item> 
+		</md-list-item> 
 	</md-list>
 </md-bottom-sheet>
 

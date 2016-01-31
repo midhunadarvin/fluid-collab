@@ -6,21 +6,19 @@ module.exports = function(app) {
 	
 	app.route('/api/users')
 		.post(users.signup)
-		.get(users.list);
+		.get(users.authenticate,users.list);
 
 	app.route('/api/users/:userId')					
 		.get(users.read)
-		.put(users.update)
-		.delete(users.delete);
+		.put(users.authenticate,users.update)
+		.delete(users.authenticate,users.delete);
 	
 	app.param('userId', users.userByID);
 
 	app.route('/api/signup')
-		.get(users.renderSignup)
 		.post(users.signup);
 
 	app.route('/api/login')
-		.get(users.renderSignin)
 		.post(passport.authenticate('local'),users.login);
 
 	app.get('/signout', users.signout);

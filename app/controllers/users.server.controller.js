@@ -1,8 +1,9 @@
-var User = require('mongoose').model('User');
+var User = require('mongoose').model('User');			// User model
+var jwt  = require('jsonwebtoken'); 					// used to create, sign, and verify tokens
+var config = require('../../config/config.js');			// Configuration options
 
 // All requests with userId route param will pass through this middleware
 exports.userByID = function(req, res, next, id) {
-
 	User.findOne({_id: id }, function(err, user) {
 		if (err) {
 			return next(err);
@@ -11,9 +12,104 @@ exports.userByID = function(req, res, next, id) {
 			next();
 		}
 	});
+};
+
+// To register a user using local strategy
+exports.signup = function(req, res, next) {						
+	if (!req.user) {											// If request doesn't have user object
+		var user = new User(req.body);							// Creates a User model with req body
+		var message = null;
+		user.provider = 'local';								// Sets provider property of user to local
+		user.save(function(err) {								// Saves the user model in database
+			if (err) {
+				var message = getErrorMessage(err);				// Create error message
+				req.flash('error', message);
+				return res.redirect('/signup');
+			}
+			// Login the registered user.
+			req.login(user, function(err) {						// Login method of Passport module
+				
+				if (err) 
+					return res.json(err);
+				
+				// create a token
+			    var token = jwt.sign(user, config.secret, {
+			          expiresIn: 86400 // expires in 24 hours
+			    });
+
+				return res.json({
+		    				success:true,
+		    				token: token,
+		    				user: {
+								id: user._id, 
+								firstName:user.firstName,
+								lastName:user.lastName,
+								username:user.username,
+								email:user.email
+							}
+    			});
+
+			});
+		});
+	} else {
+		return res.redirect('/');
+	}
+};
+
+exports.login = function(req, res) {						// To login a user
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    var user = req.user;
+
+    // create a token
+    var token = jwt.sign(user, config.secret , {
+          expiresIn: 86400 // expires in 24 hours
+    });
+
+    res.json({
+    			success:true,
+    			token: token,
+    			user: {
+					id: user._id, 
+					firstName:user.firstName,
+					lastName:user.lastName,
+					username:user.username,
+					email:user.email
+				}
+    });
+    //res.redirect('/users/' + req.user.username);
 
 };
 
+// To authenticate requests by verifying authtoken
+exports.authenticate = function(req,res,next){
+	// check header or url parameters or post parameters for token
+ 	 var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+ 	// Decode token
+  	if (token) {
+	    // verifies secret and checks exp
+	    jwt.verify(token, config.secret, function(err, decoded) {      
+		    if (err) {
+		    	return res.json({ success: false, message: 'Failed to authenticate token.' });    
+		    } else {
+		        // if everything is good, save to request for use in other routes
+		        req.decoded = decoded;    
+		        next();
+		    }
+    	});
+
+  	} else {
+	    // if there is no token
+	    // return an error
+	    return res.status(403).send({ 
+	        success: false, 
+	        message: 'No token provided.' 
+	    });
+  	}
+}
+
+// Check if user is logged in .
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({ message: 'User is not logged in' });
@@ -21,6 +117,7 @@ exports.requiresLogin = function(req, res, next) {
 	next();
 };
 
+// List all the users
 exports.list = function(req, res, next) {
 
 	User.find({}, function(err, users) {
@@ -32,12 +129,14 @@ exports.list = function(req, res, next) {
 	});
 };
 
+// Read info of one user
 exports.read = function(req, res) {
 
 	res.json(req.user);
 
 };
 
+// Read info of one user
 exports.update = function(req, res, next) {
 
 	User.findByIdAndUpdate(req.user._id, req.body, function(err, user) {
@@ -50,6 +149,7 @@ exports.update = function(req, res, next) {
 
 };
 
+// Delete user
 exports.delete = function(req, res, next) {
 
 	req.user.remove(function(err) {
@@ -85,56 +185,7 @@ var getErrorMessage = function(err) {
 		return message;
 };
 
-/* Functions to Render views */ 
-
-exports.renderSignin = function(req, res, next) {
-	if (!req.user) {
-		res.render('signin', { title: 'Sign-in Form', messages: req.flash('error') || req.flash('info')	});
-	} else {
-		return res.redirect('/');
-	}
-};
-
-exports.renderSignup = function(req, res, next) {
-	if (!req.user) {
-		res.render('signup', { title: 'Sign-up Form', messages: req.flash('error')});
-	} else {
-		return res.redirect('/');
-	}
-};
-
-exports.signup = function(req, res, next) {						// To register a user
-	if (!req.user) {											// If request doesn't have user object
-		var user = new User(req.body);							// Creates a User model with req body
-		var message = null;
-		user.provider = 'local';								// Sets provider property of user to local
-		user.save(function(err) {								// Saves the user model in database
-			if (err) {
-				var message = getErrorMessage(err);				// Create error message
-				req.flash('error', message);
-				return res.redirect('/signup');
-			}
-
-			req.login(user, function(err) {						// Login method of Passport module
-				if (err) 
-					return res.json(err);;
-				return res.json(user);
-
-			});
-		});
-	} else {
-		return res.redirect('/');
-	}
-};
-
-exports.login = function(req, res) {						// To login a user
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    res.json({message:"success",user:req.user});
-    //res.redirect('/users/' + req.user.username);
-
-};
-
+// Register user using other strategies.
 exports.saveOAuthUserProfile = function(req, profile, done) {
 	User.findOne({ provider: profile.provider, providerId: profile.providerId }, function(err, user) {
 		if (err) {
@@ -163,6 +214,7 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 	});
 };
 
+// Log out user
 exports.signout = function(req, res) {
 	req.logout();												// Logout Method of Passport module
 	res.redirect('/');

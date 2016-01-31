@@ -9,25 +9,38 @@ angular.module('main')
 .controller('loginformController', ['$scope',
 								    '$state', 
 								    'Users',
-								    'Login',
 								    'Authentication', 
-						function($scope,$state,Users,Login,Authentication){
+						function($scope,$state,Users,Authentication){
 
 	$scope.isActive = true;
 	
-	$scope.login = function(req,res){
+	$scope.login = function(oldUser){
+
+		var user = new Users.login(oldUser);
 		
-		Authentication.user = req.user;
-		$state.go('home');
-	
+		user.$save(function(response) {
+			if(response.user){
+				Authentication.user = response.user;
+				Authentication.token = response.token;
+				$state.go('home');
+			}
+			
+		}, function(errorResponse) {
+			$scope.error = errorResponse.data.message;
+		});
 	};
 
 	$scope.signup = function(newUser){
 
-		var user = new Users(newUser);
+		var user = new Users.signup(newUser);
+
 		user.$save(function(response) {
-			Authentication.user = response;
-			$state.go('home');
+			if(response.user){
+				Authentication.user = response.user;
+				Authentication.token = response.token;
+				$state.go('home');
+			}
+			
 		}, function(errorResponse) {
 			$scope.error = errorResponse.data.message;
 		});

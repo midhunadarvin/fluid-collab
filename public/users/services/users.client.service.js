@@ -1,11 +1,11 @@
 angular.module('users')
 
-.factory('Users', ['$resource',
-	function($resource) {
-		return $resource('api/users/:userId', { userId: '@_id' }, { update: { method: 'PUT' } });
-}])
+.factory('Users', ['$resource',function($resource) {
 
-.factory('Login', ['$resource',
-	function($resource) {
-		return $resource('api/login');
+	var Users = {};
+	Users.users = $resource('api/users/:userId', { userId: '@_id' }, { update: { method: 'PUT' } });
+	Users.signup = $resource('api/signup');
+	Users.login = $resource('api/login');
+
+	return Users;
 }]);

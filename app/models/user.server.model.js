@@ -89,6 +89,8 @@ UserSchema.statics.findUniqueUsername = function(username, suffix,callback) {
 /* --- Instance Methods --- */
 
 UserSchema.methods.hashPassword = function(password) {
+	console.log(typeof(password));
+	password = new Buffer(password, 'binary')
 	return crypto.pbkdf2Sync(password, this.salt, 10000,64).toString('base64');
 };
 
