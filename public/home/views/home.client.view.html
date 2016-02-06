@@ -11,7 +11,7 @@
           Close Sidenav Left
         </md-button>
         <md-list>
-            <md-item ng-repeat="item in menu">
+            <md-list-item ng-repeat="item in menu">
               <md-item-content md-ink-ripple layout="row" layout-align="start center">
                
                 <div class="inset">
@@ -20,7 +20,7 @@
                 <div class="inset">{{item.title}}</div>
                 
               </md-item-content>
-            </md-item>
+            </md-list-item>
          </md-list>
       </md-content>
     </md-sidenav>
@@ -50,7 +50,7 @@
                     <md-card-content>
                       <h2>Projects</h2>
                       <md-list>
-                        <md-item ng-repeat="project in projects | filter:search">
+                        <md-list-item ng-repeat="project in projects | filter:search">
                           <md-item-content layout="row">
                             <div class="md-tile-left inset" layout="column" layout-align="center">
                                 <user-avatar></user-avatar>
@@ -65,13 +65,13 @@
                           </md-item-content>
                           <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
                           <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-                        </md-item>
+                        </md-list-item>
                         <md-divider></md-divider>
-                        <md-item layout class="inset">
+                        <md-list-item layout class="inset">
                             <md-button layout layout-align="start center" flex class="md-primary">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> More
+                               More
                             </md-button>
-                        </md-item>
+                        </md-list-item>
                       </md-list>
                     </md-card-content>
                   </md-card>
@@ -87,7 +87,7 @@
                     <md-card-content>
                       <h2>Favorites</h2>
                       <md-list>
-                        <md-item ng-repeat="project in projects | filter:search | orderBy:'-name'">
+                        <md-list-item ng-repeat="project in projects | filter:search | orderBy:'-name'">
                            <md-item-content layout="row">
                             <div class="md-tile-left inset" hide-sm layout="column" layout-align="center">
                                 <user-avatar></user-avatar>
@@ -102,14 +102,14 @@
                           </md-item-content>
                           <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
                           <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-                        </md-item>
+                        </md-list-item>
                         <md-divider></md-divider>
-                        <md-item layout class="inset">
+                        <md-list-item layout class="inset">
                             <md-button layout layout-align="start center" flex class="md-primary">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg> More
+                              More
                             </md-button>
-                        </md-item>
-                      </md-list>
+                        </md-list-item>
+                      </md-list> 
                     </md-card-content>
                   </md-card>
               </div>

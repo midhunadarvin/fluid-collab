@@ -52,9 +52,6 @@ md-sidenav {
 md-sidenav ng-md-icon {
   top: 5px;
 }
-md-item-content{
-  position: relative;
-}
 .user-avatar {
   border-radius: 99%;
 }
