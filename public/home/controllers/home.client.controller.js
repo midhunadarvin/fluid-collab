@@ -5,7 +5,8 @@ angular.module('home')
 							   '$mdBottomSheet',
 							   '$mdSidenav',
 							   '$mdDialog',
-							   function( $scope,$location,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog ) {
+                 'Projects',
+							   function( $scope,$location,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
 
@@ -29,6 +30,16 @@ angular.module('home')
   };
 
   $scope.addProject = function(new_project){
+
+      var project = new Projects(new_project);
+
+      project.$save(function(response) {
+        console.log("Project saved successfully : " + response);
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+        console.log("Project save unsuccessfull : " + errorResponse.data.message);
+      });
+      
       $mdDialog.hide(new_project);
   };
 

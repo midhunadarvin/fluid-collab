@@ -28,7 +28,7 @@ exports.hasAuthorization = function(req, res, next) {
 };
 
 // Create a new Project 
-exports.create = function(req, res) {
+exports.create = function(req, res, next) {
 
 	var project = new Project(req.body);
 	project.creator = req.user;
