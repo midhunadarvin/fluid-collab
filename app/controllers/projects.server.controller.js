@@ -36,7 +36,18 @@ exports.create = function(req, res, next) {
 		if (err) {
 			return next(err);
 		} else {
-			res.json(project);
+
+			res.json({
+		    			success:true,
+		    			project: {
+							id: project._id, 
+							title:project.title,
+							summary:project.summary,
+							creator:project.creator,
+							client:project.client,
+							assignees:project.assignees
+						}
+    			});
 		}
 	});
 };

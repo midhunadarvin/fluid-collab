@@ -1,17 +1,23 @@
 angular.module('home')
 .controller('HomeController', ['$scope',
                  '$location',
+                 '$state',
 							   'Authentication',
 							   '$mdBottomSheet',
 							   '$mdSidenav',
 							   '$mdDialog',
                  'Projects',
-							   function( $scope,$location,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
+							   function( $scope,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
 
   $scope.dashboardInit = function(){
-      $scope.user = Authentication.user;
+
+      if(Authentication.user)
+        $scope.user = Authentication.user;
+      else
+        $state.go('index.signin');
+      
   }
   // Bottom settings popup
 	$scope.showListBottomSheet = function($event) {
