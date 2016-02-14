@@ -4,8 +4,8 @@
  	<md-content flex>
  		<section ng-controller="ProjectsController">
 			<div data-ng-show="!authentication.user">
-				<a href="/signup">Signup</a>
-				<a href="/signin">Signin</a>
+				<!-- <a href="/signup">Signup</a>
+				<a href="/signin">Signin</a> -->
 			</div>
 			<div data-ng-show="authentication.user">
 				<h1>Hello <span ng-bind="authentication.user.fullName"></span></h1>
