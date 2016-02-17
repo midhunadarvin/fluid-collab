@@ -1,5 +1,7 @@
 angular.module('home')
-.controller('HomeController', ['$scope',
+.controller('HomeController', [
+                 '$log',
+                 '$scope',
                  '$location',
                  '$state',
 							   'Authentication',
@@ -7,7 +9,7 @@ angular.module('home')
 							   '$mdSidenav',
 							   '$mdDialog',
                  'Projects',
-							   function( $scope,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
+							   function( $log,$scope,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
 
@@ -41,13 +43,31 @@ angular.module('home')
       $mdDialog.hide(new_project);
   };
 
+  $scope.deleteProject = function(){
+
+      $log.info('Deleting project');
+      if (project) {
+          project.$remove(function() {
+            for (var i in $scope.projects) {
+              if ($scope.projects[i] === project) {
+                $scope.projects.splice(i, 1);
+              }
+            }
+          });
+      } else {
+          $scope.project.$remove(function() {
+            $location.path('projects');
+          });
+      }
+  }
+
   // Get the list of projects from database
   $scope.listProjects = function(){
 
       console.log("Listing projects :");
 
       $scope.projects = Projects.query();
-      $scope.$apply();
+      //$scope.$apply();
   };
 
   // Show dialog box for adding new project

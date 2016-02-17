@@ -34,6 +34,21 @@
     <div class="wrap" layout="column">
 
     	<toolbar></toolbar>
+
+      <section ng-controller="ProjectsController">
+      <div data-ng-show="!authentication.user">
+        <!-- <a href="/signup">Signup</a>
+        <a href="/signin">Signin</a> -->
+      </div>
+      <div data-ng-show="authentication.user">
+        <h1>Hello <span ng-bind="authentication.user.fullName"></span></h1>
+          <a href="/signout">Signout</a>
+          <ul>
+          <li><a href="/#!/projects">List Projects</a></li>
+          <li><a href="/#!/projects/create">Create Project</a></li>
+          </ul>
+        </div>
+      </section>
     
 	    <md-content class="background-grey" flex="100" md-scroll-y>
           <ui-view layout="column" layout-fill layout-padding>
@@ -45,8 +60,25 @@
                    ng-switch-when="0"
                    md-swipe-left="next()"
                    md-swipe-right="previous()"
-                   layout="row" layout-align="center center">
-                  <md-card flex flex-gt-sm="90" flex-gt-md="80">
+                   layout="column" layout-align="center center">
+
+                  <md-card class="fill_width" ng-repeat="project in projects | filter:search">
+                      <md-card-title>
+                        <md-card-title-text>
+                          <span class="md-headline">{{project.title}}</span>
+                          <span class="md-subhead">Client : {{project.client}}</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                          <div class="md-media-lg card-media"></div>
+                        </md-card-title-media>
+                      </md-card-title>
+                      <md-card-actions layout="row" layout-align="end center" ng-show="user._id == project.creator._id">
+                        <md-button><a href="/#!/projects/{{project._id}}/edit">edit</a></md-button>
+                        <md-button><a href="#" ng-click="deleteProject();">delete</a></md-button>
+                      </md-card-actions>
+                  </md-card> 
+
+                <!--   <md-card flex flex-gt-sm="90" flex-gt-md="80">
                     <md-card-content>
                       <h2>Projects</h2>
                       <md-list>
@@ -62,6 +94,11 @@
                                 Leader : {{project.leader}}
                               </p>
                             </div>
+                            <div class="md-tile-content" layout="column" ng-show="user._id == project.creator._id">
+                                <a href="/#!/projects/{{project._id}}/edit">edit</a>
+                                <a href="#" ng-click="delete();">delete</a>
+                            </div>
+
                           </md-item-content>
                           <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
                           <md-divider hide-gt-sm ng-if="!$last"></md-divider>
@@ -111,7 +148,7 @@
                         </md-list-item>
                       </md-list> 
                     </md-card-content>
-                  </md-card>
+                  </md-card> -->
               </div>
               
           </ng-switch>

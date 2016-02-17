@@ -1,8 +1,8 @@
 <section ng-controller="ProjectsController" ng-init="findOne()">
 <h1 ng-bind="project.title"></h1>
 <div ng-show="authentication.user._id == project.creator._id">
-<a href="/#!/projects/{{project._id}}/edit">edit</a>
-<a href="#" ng-click="delete();">delete</a>
+	<a href="/#!/projects/{{project._id}}/edit">edit</a>
+	<a href="#" ng-click="delete();">delete</a>
 </div>
 <small>
 <em>Posted on</em>

@@ -215,7 +215,12 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 };
 
 // Log out user
-exports.signout = function(req, res) {
-	req.logout();												// Logout Method of Passport module
+exports.signout = function(req, res) {					
+	req.session.destroy();
+	req.logout();				// Logout Method of Passport module
 	res.redirect('/');
+	res.json({
+		success:true,
+		message:"Logged out"
+	});
 };
