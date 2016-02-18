@@ -77,3 +77,8 @@ md-sidenav ng-md-icon {
 .background-grey{
   background-color: #ddd;
 }
+
+.card-media {
+  background-color: #999999; 
+}
+

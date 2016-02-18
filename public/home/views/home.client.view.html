@@ -41,7 +41,7 @@
         <a href="/signin">Signin</a> -->
       </div>
       <div data-ng-show="authentication.user">
-        <h1>Hello <span ng-bind="authentication.user.fullName"></span></h1>
+        <h3>Hello <span ng-bind="authentication.user.fullName"></span></h3>
           <a href="/signout">Signout</a>
           <ul>
           <li><a href="/#!/projects">List Projects</a></li>
@@ -67,9 +67,10 @@
                         <md-card-title-text>
                           <span class="md-headline">{{project.title}}</span>
                           <span class="md-subhead">Client : {{project.client}}</span>
+                          <p>{{project.summary}}</p>
                         </md-card-title-text>
                         <md-card-title-media>
-                          <div class="md-media-lg card-media"></div>
+                          <div class="md-media-md card-media"></div>
                         </md-card-title-media>
                       </md-card-title>
                       <md-card-actions layout="row" layout-align="end center" ng-show="user._id == project.creator._id">
