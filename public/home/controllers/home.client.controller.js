@@ -12,6 +12,7 @@ angular.module('home')
 							   function( $log,$scope,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
+  $scope.authentication = Authentication;
 
   // Initialize Dashboard
   $scope.dashboardInit = function(){
@@ -128,15 +129,19 @@ angular.module('home')
     	$mdSidenav(menuId).toggle();
   };
 
+  $scope.navigate = function(link) {
+      $location.path(link);
+  }
+
   $scope.menu = [
     {
-      link : '',
-      title: 'Dashboard',
+      link : '/projects',
+      title: 'List Projects',
       icon: 'dashboard'
     },
     {
-      link : '',
-      title: 'Friends',
+      link : '/projects/create',
+      title: 'Create Projects',
       icon: 'group'
     },
     {

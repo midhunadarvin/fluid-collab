@@ -1,16 +1,8 @@
 <div id="signup">   
   <h1>Sign Up for Free</h1>
-   <div layout="row">
-      <a href="/oauth/facebook" class="icon-container">
-          <img id="fb_icon" class="svg" src="main/img/round-facebook.svg"/>
-      </a>  
-      <a href="/oauth/twitter" class="icon-container">
-          <img id="twitter_icon" src="main/img/round-twitter.svg"/>
-      </a>  
-      <a href="/oauth/google" class="icon-container">
-          <img id="google_icon" src="main/img/round-google-plus.svg"/>
-      </a>  
-    </div>
+
+  <social-buttons></social-buttons>
+  
   <form name="signupForm" ng-submit="signup(newUser)">
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>

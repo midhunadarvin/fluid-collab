@@ -4,15 +4,15 @@
     <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
      <md-toolbar class="md-theme-indigo">
         <h1 class="md-toolbar-tools">Sidenav Left</h1>
-        <h3 class="md-toolbar-tools">{{user.firstName}}</h3>
+        <h3 class="md-toolbar-tools" ng-bind="authentication.user.fullName"></h3>
       </md-toolbar>
       <md-content layout-padding="">
         <md-button ng-click="close()" class="md-primary" hide-gt-md="">
           Close Sidenav Left
         </md-button>
         <md-list>
-            <md-list-item ng-repeat="item in menu">
-              <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <md-list-item md-ink-ripple ng-repeat="item in menu" ng-click="navigate(item.link)">
+              <md-item-content layout="row" layout-align="start center">
                
                 <div class="inset">
                   <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
@@ -34,21 +34,6 @@
     <div class="wrap" layout="column">
 
     	<toolbar></toolbar>
-
-      <section ng-controller="ProjectsController">
-      <div data-ng-show="!authentication.user">
-        <!-- <a href="/signup">Signup</a>
-        <a href="/signin">Signin</a> -->
-      </div>
-      <div data-ng-show="authentication.user">
-        <h3>Hello <span ng-bind="authentication.user.fullName"></span></h3>
-          <a href="/signout">Signout</a>
-          <ul>
-          <li><a href="/#!/projects">List Projects</a></li>
-          <li><a href="/#!/projects/create">Create Project</a></li>
-          </ul>
-        </div>
-      </section>
     
 	    <md-content class="background-grey" flex="100" md-scroll-y>
           <ui-view layout="column" layout-fill layout-padding>
