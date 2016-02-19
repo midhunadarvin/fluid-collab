@@ -2,6 +2,7 @@ angular.module('home')
 .controller('HomeController', [
                  '$log',
                  '$scope',
+                 '$timeout',
                  '$location',
                  '$state',
 							   'Authentication',
@@ -9,7 +10,7 @@ angular.module('home')
 							   '$mdSidenav',
 							   '$mdDialog',
                  'Projects',
-							   function( $log,$scope,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
+							   function( $log,$scope,$timeout,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
   $scope.authentication = Authentication;
@@ -34,7 +35,7 @@ angular.module('home')
       var project = new Projects(new_project);
 
       project.$save(function(response) {
-        console.log("Project saved successfully : " + response);
+        console.log("Project saved successfully : " + angular.toJson(response));
         new_project = response.project;
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -79,8 +80,19 @@ angular.module('home')
         targetEvent: ev,
       })
       .then(function(project) {
-        if(project)
-          $scope.projects.unshift(project);
+        if(project){
+          //$scope.projects.unshift(project);
+          var projects = $scope.projects;
+          projects.unshift(project);
+          $scope.projects = projects;
+          //$scope.projects = Projects.query();
+          
+            $timeout(function() {
+                $scope.$apply();  
+            },2000);
+            
+        }
+          
       }, function() {
         $scope.alert = 'You cancelled the dialog.';
       });

@@ -22,7 +22,7 @@ body {
 }
 
 .fill_height{
-  height: 100%;
+  height: 100vh;
 }
 
 .fill_width{

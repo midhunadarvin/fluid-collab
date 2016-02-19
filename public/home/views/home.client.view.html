@@ -58,83 +58,14 @@
                           <div class="md-media-md card-media"></div>
                         </md-card-title-media>
                       </md-card-title>
+                      {{user._id}}    -----   {{project.creator._id}}
                       <md-card-actions layout="row" layout-align="end center" ng-show="user._id == project.creator._id">
+
                         <md-button><a href="/#!/projects/{{project._id}}/edit">edit</a></md-button>
                         <md-button><a href="#" ng-click="deleteProject();">delete</a></md-button>
                       </md-card-actions>
                   </md-card> 
 
-                <!--   <md-card flex flex-gt-sm="90" flex-gt-md="80">
-                    <md-card-content>
-                      <h2>Projects</h2>
-                      <md-list>
-                        <md-list-item ng-repeat="project in projects | filter:search">
-                          <md-item-content layout="row">
-                            <div class="md-tile-left inset" layout="column" layout-align="center">
-                                <user-avatar></user-avatar>
-                            </div>
-                            <div class="md-tile-content" layout="column" flex>
-                              <h3>{{project.title}}</h3>
-                              <h4>Client : {{project.client}}</h4>
-                              <p>
-                                Leader : {{project.leader}}
-                              </p>
-                            </div>
-                            <div class="md-tile-content" layout="column" ng-show="user._id == project.creator._id">
-                                <a href="/#!/projects/{{project._id}}/edit">edit</a>
-                                <a href="#" ng-click="delete();">delete</a>
-                            </div>
-
-                          </md-item-content>
-                          <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
-                          <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-                        </md-list-item>
-                        <md-divider></md-divider>
-                        <md-list-item layout class="inset">
-                            <md-button layout layout-align="start center" flex class="md-primary">
-                               More
-                            </md-button>
-                        </md-list-item>
-                      </md-list>
-                    </md-card-content>
-                  </md-card>
-              </div>
-              <div role="tabpanel"
-                   id="tab2-content"
-                   aria-labelledby="tab2"
-                   ng-switch-when="1"
-                   md-swipe-left="next()"
-                   md-swipe-right="previous()" 
-                   layout="row" layout-align="center center">
-                  <md-card flex flex-gt-sm="90" flex-gt-md="80">
-                    <md-card-content>
-                      <h2>Favorites</h2>
-                      <md-list>
-                        <md-list-item ng-repeat="project in projects | filter:search | orderBy:'-name'">
-                           <md-item-content layout="row">
-                            <div class="md-tile-left inset" hide-sm layout="column" layout-align="center">
-                                <user-avatar></user-avatar>
-                            </div>
-                            <div class="md-tile-content" layout="column" flex>
-                              <h3>{{project.title}}</h3>
-                              <h4>Client : {{project.client}}</h4>
-                              <p>
-                                Leader : {{project.leader}}
-                              </p>
-                            </div>
-                          </md-item-content>
-                          <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
-                          <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-                        </md-list-item>
-                        <md-divider></md-divider>
-                        <md-list-item layout class="inset">
-                            <md-button layout layout-align="start center" flex class="md-primary">
-                              More
-                            </md-button>
-                        </md-list-item>
-                      </md-list> 
-                    </md-card-content>
-                  </md-card> -->
               </div>
               
           </ng-switch>
