@@ -27,6 +27,10 @@ angular.module('home')
       
   }
 
+  $scope.addProjectDialogInit = function(){
+      $scope.new_project = {};
+  } 
+
   // Save project to database
   $scope.addProject = function(new_project){
 
@@ -82,6 +86,7 @@ angular.module('home')
 
   // Show dialog box for adding new project
   $scope.showAddDialog = function(ev) {
+      $scope.new_project = {};
       $mdDialog.show({
         controller: 'HomeController',
         templateUrl: '/home/views/dialogs/home.dialog.addProject.html',

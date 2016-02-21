@@ -7,7 +7,8 @@ var config = require('./config'),								// Configuration
 	methodOverride = require('method-override'),				// Provides 'PUT' & 'DELETE' http verbs
 	session = require('express-session'),						// For using sessions
 	flash = require('connect-flash'),							// For using flashes of sessions
-	passport = require('passport');								// For authentication
+	passport = require('passport'),								// For authentication
+	cloudinary = require('cloudinary');							// Image hosting service
 
 module.exports = function() {
 	var app = express();										// Create the express application
@@ -32,6 +33,12 @@ module.exports = function() {
 	}));
 
 	app.set('JWTSecret', config.secret); 						// secret variable
+
+	cloudinary.config({ 										// Configure cloudinary
+	  cloud_name: config.cloudinary.Name, 
+	  api_key: config.cloudinary.APIKey, 
+	  api_secret: config.cloudinary.APISecret
+	});
 
 	app.use(flash());
 	app.use(passport.initialize());								// Registering passport in express application

@@ -23,6 +23,7 @@ var ProjectSchema = new Schema({
 			min: 0, 
 			max: 9 
 		},
+		thumbnail: String,
 		assignees: [{type: Schema.ObjectId, ref: 'User'}],	// Tech assigned 
 		creator: {											// Project creator
 			type: Schema.ObjectId,

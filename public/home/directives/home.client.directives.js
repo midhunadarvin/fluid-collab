@@ -41,9 +41,23 @@ function projectImageUploadLink(scope, element, attrs) {
   }
 
   input.on('change', function(e) {
+
+    var reader  = new FileReader();
+    reader.addEventListener("load", function () {
+
+        alert();
+        scope.fileName = reader.result;
+        scope.new_project.imgData = reader.result;
+      
+        scope.$apply();  
+       
+
+    }, false);
+
     var files = e.target.files;
     if (files[0]) {
-      scope.fileName = files[0].name;
+      //scope.fileName = files[0].name;
+      reader.readAsDataURL(files[0]);
     } else {
       scope.fileName = null;
     }

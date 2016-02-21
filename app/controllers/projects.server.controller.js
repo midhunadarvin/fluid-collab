@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Project = mongoose.model('Project');
+var cloudinary = require('cloudinary');	
 
 
 // All requests with a projectId route param will pass through this middleware
@@ -31,27 +32,37 @@ exports.hasAuthorization = function(req, res, next) {
 exports.create = function(req, res, next) {
 
 	var project = new Project(req.body);
-	console.log(req.user);
+	console.log("Requested user" + req.user);
 	project.creator = req.user;
-	project.save(function(err) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json({
-		    		success:true,
-		    		project: {
-						id: project._id, 
-						title:project.title,
-						summary:project.summary,
-						creator:{
-							'_id':req.user.id
-						},
-						client:project.client,
-						assignees:project.assignees
-					}
-    		});
-		}
-	});
+
+	//console.log("Image Data" + req.body.imgData);
+	cloudinary.uploader.upload(req.body.imgData, function(result) { 
+  		console.log(result);
+  		project.thumbnail = result.url;
+
+  		project.save(function(err) {
+			if (err) {
+				return next(err);
+			} else {
+				res.json({
+			    		success:true,
+			    		project: {
+							id: project._id, 
+							title:project.title,
+							summary:project.summary,
+							thumbnail:project.thumbnail,
+							creator:{
+								'_id':req.user.id
+							},
+							client:project.client,
+							assignees:project.assignees
+						}
+	    		});
+			}
+		});
+	});	
+	
+	
 };
 
 // List all the Projects 
