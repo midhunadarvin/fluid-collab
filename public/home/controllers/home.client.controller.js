@@ -54,7 +54,8 @@ angular.module('home')
       
       
   };
-
+  
+  // Delete a project from database
   $scope.deleteProject = function(){
 
       $log.info('Deleting project');
@@ -75,11 +76,8 @@ angular.module('home')
 
   // Get the list of projects from database
   $scope.listProjects = function(){
-
-      console.log("Listing projects :");
-
+      console.log("Listing projects");
       $scope.projects = Projects.query();
-      //$scope.$apply();
   };
 
   // Show dialog box for adding new project

@@ -32,26 +32,24 @@ exports.create = function(req, res, next) {
 
 	var project = new Project(req.body);
 	console.log(req.user);
-	//var user = new User({});
 	project.creator = req.user;
 	project.save(function(err) {
 		if (err) {
 			return next(err);
 		} else {
-
 			res.json({
-		    			success:true,
-		    			project: {
-							id: project._id, 
-							title:project.title,
-							summary:project.summary,
-							creator:{
-								'_id':req.user.id
-							},
-							client:project.client,
-							assignees:project.assignees
-						}
-    			});
+		    		success:true,
+		    		project: {
+						id: project._id, 
+						title:project.title,
+						summary:project.summary,
+						creator:{
+							'_id':req.user.id
+						},
+						client:project.client,
+						assignees:project.assignees
+					}
+    		});
 		}
 	});
 };

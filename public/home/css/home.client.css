@@ -69,6 +69,10 @@ md-sidenav ng-md-icon {
   color:#000;
 }
 
+#textInput{
+  border:0px;
+}
+
 .vert_list md-item{
   display: block;
   position: relative;
