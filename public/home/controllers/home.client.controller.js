@@ -18,31 +18,41 @@ angular.module('home')
   // Initialize Dashboard
   $scope.dashboardInit = function(){
 
-      if(Authentication.user)
-        $scope.user = Authentication.user;
+      if(Authentication.user)                      // Check if Authentication service has a user logged in
+        $scope.user = Authentication.user;        
       else
-        $state.go('index.signin');
+        $state.go('index.signin');                 // Go back to login page   
 
-      $scope.listProjects();
+      $scope.listProjects();                       // For listing all available projects
       
   }
 
   // Save project to database
   $scope.addProject = function(new_project){
 
-      console.log("Saving project :");
+      $log.log("Saving project : ");
 
-      var project = new Projects(new_project);
+      // Create a new Projects resource object
+      // We pass the new_project scope object as params 
+      var project = new Projects(new_project);    
 
-      project.$save(function(response) {
-        console.log("Project saved successfully : " + angular.toJson(response));
-        new_project = response.project;
-      }, function(errorResponse) {
-        $scope.error = errorResponse.data.message;
-        console.log("Project save unsuccessfull : " + errorResponse.data.message);
-      });
+
+      //Make post request to the server
+      project.$save(
+        // Success function     
+        function(response) {                                   
+          $log.info("Project saved successfully : \n" + angular.toJson(response));
+          $mdDialog.hide(response.project);
+        }, 
+        // Failure function
+        function(errorResponse) {                   
+          $scope.error = errorResponse.data.message;
+          $log.error("Project save unsuccessfull : \n" + errorResponse.data.message);
+          $mdDialog.hide();
+        }
+      );
       
-      $mdDialog.hide(new_project);
+      
   };
 
   $scope.deleteProject = function(){
@@ -80,16 +90,14 @@ angular.module('home')
         targetEvent: ev,
       })
       .then(function(project) {
+
+        $log.info("Saved project response : \n" + angular.toJson(project));
+
         if(project){
-          //$scope.projects.unshift(project);
-          var projects = $scope.projects;
-          projects.unshift(project);
-          $scope.projects = projects;
-          //$scope.projects = Projects.query();
-          
-            $timeout(function() {
-                $scope.$apply();  
-            },2000);
+          $scope.projects.unshift(project);
+          $timeout(function() {
+            $scope.$apply();  
+          },2000);
             
         }
           
