@@ -37,20 +37,20 @@ angular.module('home')
   $scope.addProject = function(new_project){
 
       //Check if files are set in scope.
-      if ($scope.files[0] && !$scope.files[0].$error) {
+      if ($scope.file && !$scope.file.$error) {
 
           // Uploading image file to cloudinary
           $log.log("Uploading file to cloudinary database.");
-          $scope.files[0].upload = $upload.upload({
+          $scope.file.upload = $upload.upload({
             url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
             data: {
               upload_preset: cloudinary.config().upload_preset,
               tags: 'thumbnail',
-              file: $scope.files[0]
+              file: $scope.file
             }
           }).progress(function (e) {
-              $scope.files[0].progress = Math.round((e.loaded * 100.0) / e.total);
-              $log.log("Uploading... " + $scope.files[0].progress + "%");
+              $scope.file.progress = Math.round((e.loaded * 100.0) / e.total);
+              $log.log("Uploading... " + $scope.file.progress + "%");
           }).success(function (data, status, headers, config) {
               //data.context = {custom: {photo: $scope.title}};
               //file.result = data;
@@ -59,6 +59,7 @@ angular.module('home')
 
               // setting the thumbnail property as uploaded image url.
               new_project.thumbnail = data.url;
+
               
               // Create a new Projects resource object
               // We pass the new_project scope object as params 
@@ -88,8 +89,9 @@ angular.module('home')
       
   };
 
-  $scope.uploadFiles = function(files){
-      $scope.files = files;
+  $scope.uploadFiles = function(file){
+      $scope.file = file;
+
       if (!$scope.files) return;
 
       /*angular.forEach(files, function(file){
