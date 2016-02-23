@@ -8,6 +8,8 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [ 'ui.rout
 																		'ngResource',
 																		'main',
 																		'users',
+																		'cloudinary',
+																		'ngFileUpload',
 																		'projects',
 																		'home'
 																	]);
@@ -22,6 +24,12 @@ mainApplicationModule.config(function($mdThemingProvider) {
 		    .accentPalette('orange')
 		    .backgroundPalette('light-blue');
 });
+
+mainApplicationModule.config(['cloudinaryProvider', function (cloudinaryProvider) {
+  cloudinaryProvider
+      .set("cloud_name", "fluid-collab")
+      .set("upload_preset", "z6pupi4m");
+}]);
 
 if (window.location.hash === '#_=_') window.location.hash = '#!';
 

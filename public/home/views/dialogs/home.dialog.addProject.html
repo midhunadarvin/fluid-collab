@@ -31,12 +31,12 @@
 				</md-input-container> 
 			</div>
 			<div layout> 
-				<project-image-upload></project-image-upload>
-				<!-- <md-input-container  md-no-float>
+				<!-- <project-image-upload></project-image-upload> -->
+				<md-input-container md-no-float>
 					<input id="fileInput" type="file" class="ng-hide">
-					<md-button id="uploadButton" class="md-raised md-primary" aria-label="attach_file">Choose file</md-button>
-					<input id="textInput" ng-model="fileName" type="text" placeholder="No file chosen" ng-readonly="true">
-				</md-input-container> -->
+						<md-button id="uploadButton" class="md-raised md-primary" aria-label="attach_file" ngf-select="uploadFiles($files)" multiple title="upload" resetOnClick="true">Choose file</md-button>
+				</md-input-container>
+				<input id="textInput" ng-model="fileName" flex-gt-sm="100" flex="50" type="text" placeholder="No file chosen" ng-readonly="true">
 			</div>
 		</form> 
 	</md-content> 

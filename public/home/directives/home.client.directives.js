@@ -15,9 +15,9 @@ angular.module('home')
   };
 })
 
-.directive('projectImageUpload', projectImageUpload);
+.directive('projectImageUpload', ['Upload',projectImageUpload]);
 
-function projectImageUpload() {
+function projectImageUpload(Upload) {
   var directive = {
     restrict: 'E',
     template: '<md-input-container md-no-float><input id="fileInput" type="file" class="ng-hide"><md-button id="uploadButton" class="md-raised md-primary" aria-label="attach_file">Choose file</md-button></md-input-container><input id="textInput" ng-model="fileName" flex-gt-sm="100" flex="50" type="text" placeholder="No file chosen" ng-readonly="true">',
@@ -42,7 +42,7 @@ function projectImageUploadLink(scope, element, attrs) {
 
   input.on('change', function(e) {
 
-    var reader  = new FileReader();
+    /*var reader  = new FileReader();
     reader.addEventListener("load", function () {
 
         alert();
@@ -52,12 +52,33 @@ function projectImageUploadLink(scope, element, attrs) {
         scope.$apply();  
        
 
-    }, false);
+    }, false);*/
 
     var files = e.target.files;
     if (files[0]) {
       //scope.fileName = files[0].name;
-      reader.readAsDataURL(files[0]);
+      //reader.readAsDataURL(files[0]);
+
+          files[0].upload = Upload.upload({
+            url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
+            data: {
+              upload_preset: cloudinary.config().upload_preset,
+              file: files[0]
+            }
+          }).progress(function (e) {
+            var progress = Math.round((e.loaded * 100.0) / e.total);
+            $log.info("Uploading... " + progress + "%");
+          }).success(function (data, status, headers, config) {
+            alert("success");
+            // $rootScope.photos = $rootScope.photos || [];
+            // data.context = {custom: {photo: $scope.title}};
+            // file.result = data;
+            // $rootScope.photos.push(data);
+          }).error(function (data, status, headers, config) {
+            alert("Failed");
+            // file.result = data;
+          });
+
     } else {
       scope.fileName = null;
     }

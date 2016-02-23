@@ -17,6 +17,10 @@ module.exports = {
 		clientID: '356704566819-n6pjekl2jlu7d6emt6a6289bh19g2uml.apps.googleusercontent.com',
 		clientSecret: 'xRg0pSA1tFQyXtj7XLd6T4PQ',
 		callbackURL: 'http://fluid-collab.herokuapp.com/oauth/google/callback'
+	},
+	cloudinary: {
+		Name: 'fluid-collab',
+		APIKey: '384611851427943',
+		APISecret: 'SucJusJPJgd53msieYf5tW0DJiA'
 	}
-
 };

@@ -60,7 +60,7 @@ exports.create = function(req, res, next) {
 	    		});
 			}
 		});
-	});	
+	},{ width: 500, height: 500, crop: "limit" });	
 	
 	
 };

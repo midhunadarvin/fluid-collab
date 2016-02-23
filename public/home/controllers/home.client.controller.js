@@ -9,8 +9,10 @@ angular.module('home')
 							   '$mdBottomSheet',
 							   '$mdSidenav',
 							   '$mdDialog',
+                 'cloudinary',
+                 'Upload',
                  'Projects',
-							   function( $log,$scope,$timeout,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,Projects ) {
+							   function( $log,$scope,$timeout,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,cloudinary,$upload,Projects ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
   $scope.authentication = Authentication;
@@ -40,7 +42,6 @@ angular.module('home')
       // We pass the new_project scope object as params 
       var project = new Projects(new_project);    
 
-
       //Make post request to the server
       project.$save(
         // Success function     
@@ -55,8 +56,32 @@ angular.module('home')
           $mdDialog.hide();
         }
       );
-      
-      
+  };
+
+  $scope.uploadFiles = function(files){
+      $scope.files = files;
+      if (!$scope.files) return;
+      angular.forEach(files, function(file){
+        if (file && !file.$error) {
+          file.upload = $upload.upload({
+            url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
+            data: {
+              upload_preset: cloudinary.config().upload_preset,
+              tags: 'thumbnail',
+              file: file
+            }
+          }).progress(function (e) {
+              file.progress = Math.round((e.loaded * 100.0) / e.total);
+              //file.status = "Uploading... " + file.progress + "%";*/
+              $log.info("Uploading... " + file.progress + "%");
+          }).success(function (data, status, headers, config) {
+              data.context = {custom: {photo: $scope.title}};
+              file.result = data;
+          }).error(function (data, status, headers, config) {
+            file.result = data;
+          });
+        }
+      });
   };
   
   // Delete a project from database
