@@ -71,6 +71,7 @@ md-sidenav ng-md-icon {
 
 #textInput{
   border:0px;
+  max-width: 50% !important;
 }
 
 .vert_list md-item{

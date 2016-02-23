@@ -36,11 +36,11 @@ exports.create = function(req, res, next) {
 	project.creator = req.user;
 
 	//console.log("Image Data" + req.body.imgData);
-	cloudinary.uploader.upload(req.body.imgData, function(result) { 
+	/*cloudinary.uploader.upload(req.body.imgData, function(result) { 
   		console.log(result);
-  		project.thumbnail = result.url;
+  		project.thumbnail = result.url;*/
 
-  		project.save(function(err) {
+  	project.save(function(err) {
 			if (err) {
 				return next(err);
 			} else {
@@ -60,7 +60,7 @@ exports.create = function(req, res, next) {
 	    		});
 			}
 		});
-	},{ width: 500, height: 500, crop: "limit" });	
+	/*},{ width: 500, height: 500, crop: "limit" });	*/
 	
 	
 };

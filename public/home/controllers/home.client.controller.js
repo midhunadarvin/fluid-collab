@@ -36,32 +36,63 @@ angular.module('home')
   // Save project to database
   $scope.addProject = function(new_project){
 
-      $log.log("Saving project : ");
+      //Check if files are set in scope.
+      if ($scope.files[0] && !$scope.files[0].$error) {
 
-      // Create a new Projects resource object
-      // We pass the new_project scope object as params 
-      var project = new Projects(new_project);    
+          // Uploading image file to cloudinary
+          $log.log("Uploading file to cloudinary database.");
+          $scope.files[0].upload = $upload.upload({
+            url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
+            data: {
+              upload_preset: cloudinary.config().upload_preset,
+              tags: 'thumbnail',
+              file: $scope.files[0]
+            }
+          }).progress(function (e) {
+              $scope.files[0].progress = Math.round((e.loaded * 100.0) / e.total);
+              $log.log("Uploading... " + $scope.files[0].progress + "%");
+          }).success(function (data, status, headers, config) {
+              //data.context = {custom: {photo: $scope.title}};
+              //file.result = data;
+              $log.info("File upload completed.");
+              $log.info("File upload response data : \n" + angular.toJson(data));
 
-      //Make post request to the server
-      project.$save(
-        // Success function     
-        function(response) {                                   
-          $log.info("Project saved successfully : \n" + angular.toJson(response));
-          $mdDialog.hide(response.project);
-        }, 
-        // Failure function
-        function(errorResponse) {                   
-          $scope.error = errorResponse.data.message;
-          $log.error("Project save unsuccessfull : \n" + errorResponse.data.message);
-          $mdDialog.hide();
-        }
-      );
+              // setting the thumbnail property as uploaded image url.
+              new_project.thumbnail = data.url;
+              
+              // Create a new Projects resource object
+              // We pass the new_project scope object as params 
+              var project = new Projects(new_project);    
+
+              $log.log("Saving project : ");
+              //Make post request to the server
+              project.$save(
+                // Success function     
+                function(response) {                                   
+                  $log.info("Project saved successfully : \n" + angular.toJson(response));
+                  $mdDialog.hide(response.project);
+                }, 
+                // Failure function
+                function(errorResponse) {                   
+                  $scope.error = errorResponse.data.message;
+                  $log.error("Project save unsuccessfull : \n" + errorResponse.data.message);
+                  $mdDialog.hide();
+                }
+              );
+              
+          }).error(function (data, status, headers, config) {
+              $scope.files[0].result = data;
+          });
+      }
+
+      
   };
 
   $scope.uploadFiles = function(files){
       $scope.files = files;
       if (!$scope.files) return;
-      angular.forEach(files, function(file){
+
+      /*angular.forEach(files, function(file){
         if (file && !file.$error) {
           file.upload = $upload.upload({
             url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
@@ -72,7 +103,7 @@ angular.module('home')
             }
           }).progress(function (e) {
               file.progress = Math.round((e.loaded * 100.0) / e.total);
-              //file.status = "Uploading... " + file.progress + "%";*/
+              //file.status = "Uploading... " + file.progress + "%";
               $log.info("Uploading... " + file.progress + "%");
           }).success(function (data, status, headers, config) {
               data.context = {custom: {photo: $scope.title}};
@@ -81,7 +112,8 @@ angular.module('home')
             file.result = data;
           });
         }
-      });
+      });*/
+
   };
   
   // Delete a project from database
