@@ -47,6 +47,14 @@
                    md-swipe-right="previous()"
                    layout="column" layout-align="center center">
 
+                  <md-card class="fill_width" ng-if="!projects.length">
+                      <md-card-title > 
+                        <md-card-title-text class="text-center" flex-50 >
+                          <h4>You don't have any projects yet.</h4>
+                        </md-card-title-text>
+                      </md-card-title>
+                  </md-card> 
+
                   <md-card class="fill_width" ng-repeat="project in projects | filter:search">
                       <md-card-title>
                         <md-card-title-text>

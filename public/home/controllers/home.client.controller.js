@@ -36,6 +36,28 @@ angular.module('home')
   // Save project to database
   $scope.addProject = function(new_project){
 
+      function saveProject() {
+            // Create a new Projects resource object
+            // We pass the new_project scope object as params 
+            var project = new Projects(new_project);    
+
+            $log.log("Saving project : ");
+            //Make post request to the server
+            project.$save(
+              // Success function     
+                function(response) {                                   
+                  $log.info("Project saved successfully : \n" + angular.toJson(response));
+                  $mdDialog.hide(response.project);
+                }, 
+                // Failure function
+                function(errorResponse) {                   
+                  $scope.error = errorResponse.data.message;
+                  $log.error("Project save unsuccessfull : \n" + errorResponse.data.message);
+                  $mdDialog.hide();
+                }
+              );
+      }
+
       //Check if files are set in scope.
       if ($scope.file && !$scope.file.$error) {
 
@@ -59,31 +81,13 @@ angular.module('home')
 
               // setting the thumbnail property as uploaded image url.
               new_project.thumbnail = data.url;
-
-              
-              // Create a new Projects resource object
-              // We pass the new_project scope object as params 
-              var project = new Projects(new_project);    
-
-              $log.log("Saving project : ");
-              //Make post request to the server
-              project.$save(
-                // Success function     
-                function(response) {                                   
-                  $log.info("Project saved successfully : \n" + angular.toJson(response));
-                  $mdDialog.hide(response.project);
-                }, 
-                // Failure function
-                function(errorResponse) {                   
-                  $scope.error = errorResponse.data.message;
-                  $log.error("Project save unsuccessfull : \n" + errorResponse.data.message);
-                  $mdDialog.hide();
-                }
-              );
+              saveProject();
               
           }).error(function (data, status, headers, config) {
               $scope.files[0].result = data;
           });
+      }else{
+              saveProject();
       }
 
       
