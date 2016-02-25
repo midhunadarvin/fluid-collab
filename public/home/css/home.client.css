@@ -83,6 +83,13 @@ md-sidenav ng-md-icon {
 }
 
 .card-media {
-  background-color: #999999; 
+  background-color: rgba(68, 68, 68, 0.24);
 }
 
+.card-media img{
+  height: 100%;
+}
+
+.treasure-overlay-spinner-container{
+  z-index: 85;
+}

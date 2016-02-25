@@ -6,6 +6,7 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [ 'ui.rout
 																		'ngMdIcons',
 																		'ngMaterial',
 																		'ngResource',
+																		'treasure-overlay-spinner',
 																		'main',
 																		'users',
 																		'cloudinary',

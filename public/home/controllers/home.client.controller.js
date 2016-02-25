@@ -1,6 +1,7 @@
 angular.module('home')
 .controller('HomeController', [
                  '$log',
+                 '$rootScope',
                  '$scope',
                  '$timeout',
                  '$location',
@@ -12,7 +13,7 @@ angular.module('home')
                  'cloudinary',
                  'Upload',
                  'Projects',
-							   function( $log,$scope,$timeout,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,cloudinary,$upload,Projects ) {
+							   function( $log,$rootScope,$scope,$timeout,$location,$state,Authentication,$mdBottomSheet,$mdSidenav,$mdDialog,cloudinary,$upload,Projects ) {
 
 	$scope.name = Authentication.user ? Authentication.user.fullName : 'MEAN Application';
   $scope.authentication = Authentication;
@@ -25,11 +26,14 @@ angular.module('home')
       else
         $state.go('index.signin');                 // Go back to login page   
 
+      $rootScope.spinner = {};
+      $rootScope.spinner.active = false;                // Turn loading spinner off initially.
       $scope.listProjects();                       // For listing all available projects
       
   }
 
   $scope.addProjectDialogInit = function(){
+      $rootScope.spinner.active = false;
       $scope.new_project = {};
   } 
 
@@ -37,29 +41,34 @@ angular.module('home')
   $scope.addProject = function(new_project){
 
       function saveProject() {
-            // Create a new Projects resource object
-            // We pass the new_project scope object as params 
-            var project = new Projects(new_project);    
+          // Create a new Projects resource object
+          // We pass the new_project scope object as params 
+          var project = new Projects(new_project);    
 
-            $log.log("Saving project : ");
-            //Make post request to the server
-            project.$save(
-              // Success function     
-                function(response) {                                   
-                  $log.info("Project saved successfully : \n" + angular.toJson(response));
-                  $mdDialog.hide(response.project);
-                }, 
-                // Failure function
-                function(errorResponse) {                   
-                  $scope.error = errorResponse.data.message;
-                  $log.error("Project save unsuccessfull : \n" + errorResponse.data.message);
-                  $mdDialog.hide();
-                }
-              );
+          $log.log("Saving project : ");
+          //Make post request to the server
+          project.$save(
+            // Success function     
+            function(response) {                                   
+              $log.info("Project saved successfully : \n" + angular.toJson(response));
+              $rootScope.spinner.active = false;
+              $mdDialog.hide(response.project);
+            }, 
+            // Failure function
+            function(errorResponse) {                   
+              $scope.error = errorResponse.data.message;
+              $log.error("Project save unsuccessfull : \n" + errorResponse.data.message);
+              $rootScope.spinner.active = false;
+              $mdDialog.hide();
+            }
+          );
       }
 
       //Check if files are set in scope.
       if ($scope.file && !$scope.file.$error) {
+
+          // show loading spinner
+          $rootScope.spinner.active = true;
 
           // Uploading image file to cloudinary
           $log.log("Uploading file to cloudinary database.");
@@ -87,10 +96,8 @@ angular.module('home')
               $scope.files[0].result = data;
           });
       }else{
-              saveProject();
+          saveProject();
       }
-
-      
   };
 
   $scope.uploadFiles = function(file){
