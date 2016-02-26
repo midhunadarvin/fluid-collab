@@ -9,7 +9,8 @@
     "angular-material-icons": "~0.6.0",
     "angular-resource": "~1.2",
     "cloudinary_ng": "~0.2.0",
-    "ng-file-upload": "~12.0.1"
+    "ng-file-upload": "~12.0.1",
+    "angular-treasure-overlay-spinner": "~1.1.0"
   },
   "resolutions": {
     "angular": "1.4.9"
