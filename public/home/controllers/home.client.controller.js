@@ -30,12 +30,12 @@ angular.module('home')
       $rootScope.spinner.active = false;                // Turn loading spinner off initially.
       $scope.listProjects();                       // For listing all available projects
       
-  }
+  };
 
   $scope.addProjectDialogInit = function(){
       $rootScope.spinner.active = false;
       $scope.new_project = {};
-  } 
+  }; 
 
   // Save project to database
   $scope.addProject = function(new_project){
@@ -102,38 +102,33 @@ angular.module('home')
 
   $scope.uploadFiles = function(file){
       $scope.file = file;
-
       if (!$scope.files) return;
-
-      /*angular.forEach(files, function(file){
-        if (file && !file.$error) {
-          file.upload = $upload.upload({
-            url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-            data: {
-              upload_preset: cloudinary.config().upload_preset,
-              tags: 'thumbnail',
-              file: file
-            }
-          }).progress(function (e) {
-              file.progress = Math.round((e.loaded * 100.0) / e.total);
-              //file.status = "Uploading... " + file.progress + "%";
-              $log.info("Uploading... " + file.progress + "%");
-          }).success(function (data, status, headers, config) {
-              data.context = {custom: {photo: $scope.title}};
-              file.result = data;
-          }).error(function (data, status, headers, config) {
-            file.result = data;
-          });
-        }
-      });*/
-
   };
   
   // Delete a project from database
-  $scope.deleteProject = function(){
+  $scope.deleteProject = function(id){
 
       $log.info('Deleting project');
-      if (project) {
+      Projects.remove({ projectId: id },
+            // Success function     
+            function(response) {                                   
+               $log.info("Deleted Response :\n"+ angular.toJson(response));
+
+                for (var i in $scope.projects) {
+                  if ($scope.projects[i]._id === response._id) {
+                      $scope.projects.splice(i, 1);
+                      $timeout(function() {
+                        $scope.$apply();  
+                      },2000);
+                  }
+                }
+            }, 
+            // Failure function
+            function(errorResponse) {                   
+              
+            }
+      );
+      /*if (project) {
           project.$remove(function() {
             for (var i in $scope.projects) {
               if ($scope.projects[i] === project) {
@@ -145,7 +140,11 @@ angular.module('home')
           $scope.project.$remove(function() {
             $location.path('projects');
           });
-      }
+      }*/
+  };
+
+  $scope.editProject = function(id){
+      alert(id);
   }
 
   // Get the list of projects from database
@@ -224,7 +223,7 @@ angular.module('home')
 
   $scope.navigate = function(link) {
       $location.path(link);
-  }
+  };
 
   $scope.menu = [
     {

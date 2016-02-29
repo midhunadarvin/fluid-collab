@@ -38,7 +38,6 @@
     
 	    <md-content class="background-grey" flex="100" md-scroll-y>
           <ui-view layout="column" layout-fill layout-padding>
-          <div class="inset" hide-sm></div>
             <ng-switch on="data.selectedIndex" class="tabpanel-container">
               <div role="tabpanel"
                    id="tab1-content"
@@ -64,22 +63,18 @@
                           <p>{{project.summary}}</p>
                         </md-card-title-text>
                         <md-card-title-media>
-                          <div class="md-media-md card-media">
-                            <img src="{{project.thumbnail}}">
+                          <div class="md-media-md card-media" style="background-image:url({{project.thumbnail}});">
+                            <!-- <img src="{{project.thumbnail}}"> -->
                           </div>
                         </md-card-title-media>
                       </md-card-title>
                       <md-card-actions layout="row" layout-align="end center" ng-show="user._id == project.creator._id">
-
-                        <md-button><a href="/#!/projects/{{project._id}}/edit">edit</a></md-button>
-                        <md-button><a href="#" ng-click="deleteProject();">delete</a></md-button>
+                        <md-button><a href="editProject(project._id)">edit</a></md-button>
+                        <md-button ng-click="deleteProject(project._id);"><a >delete</a></md-button>
                       </md-card-actions>
                   </md-card> 
-
-              </div>
-              
-          </ng-switch>
-          
+              </div>           
+            </ng-switch>
         </ui-view>
 	    </md-content>
 

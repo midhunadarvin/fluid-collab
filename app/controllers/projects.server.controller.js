@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose');
 var Project = mongoose.model('Project');
 var cloudinary = require('cloudinary');	
@@ -32,13 +33,8 @@ exports.hasAuthorization = function(req, res, next) {
 exports.create = function(req, res, next) {
 
 	var project = new Project(req.body);
-	console.log("Requested user" + req.user);
+	console.log("Requested user : \n" + req.user);
 	project.creator = req.user;
-
-	//console.log("Image Data" + req.body.imgData);
-	/*cloudinary.uploader.upload(req.body.imgData, function(result) { 
-  		console.log(result);
-  		project.thumbnail = result.url;*/
 
   	project.save(function(err) {
 			if (err) {
@@ -47,7 +43,7 @@ exports.create = function(req, res, next) {
 				res.json({
 			    		success:true,
 			    		project: {
-							id: project._id, 
+							_id: project._id, 
 							title:project.title,
 							summary:project.summary,
 							thumbnail:project.thumbnail,
@@ -59,10 +55,7 @@ exports.create = function(req, res, next) {
 						}
 	    		});
 			}
-		});
-	/*},{ width: 500, height: 500, crop: "limit" });	*/
-	
-	
+	});
 };
 
 // List all the Projects 
