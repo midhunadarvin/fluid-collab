@@ -8,13 +8,13 @@ var mongoose = require('./config/mongoose'),
 
 
 var db = mongoose();						                // Make the mongodb connection
-var app = express();										// Create the express application
+var app = express(db);										// Create the express application
 var passport = passport();									// Passport configuration 
 
-app.set('port', (process.env.PORT || 3000));
-
+//app.set('port', (process.env.PORT || 3000));
+var port = process.env.PORT || 3000;
 module.exports = app;			
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.listen(port, function() {
+  console.log('Node app is running on port', port);
 });							
