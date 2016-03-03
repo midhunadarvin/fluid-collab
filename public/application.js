@@ -12,7 +12,8 @@ var mainApplicationModule = angular.module(mainApplicationModuleName, [ 'ui.rout
 																		'cloudinary',
 																		'ngFileUpload',
 																		'projects',
-																		'home'
+																		'home',
+																		'chat'
 																	]);
 
 mainApplicationModule.config(['$locationProvider',function($locationProvider) {

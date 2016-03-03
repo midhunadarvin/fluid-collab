@@ -240,6 +240,11 @@ angular.module('home')
       link : '',
       title: 'Messages',
       icon: 'message'
+    },
+     {
+      link : '/chat',
+      title: 'Chat',
+      icon: 'chat'
     }
   ];
 
