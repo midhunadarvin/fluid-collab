@@ -5,7 +5,7 @@
 	<div class="wrap" flex layout="column">
 
 		<div ng-include="'/chat/views/chat.client.toolbar.html'" scope="" onload=""></div>
-		<md-content class="background-grey" flex>
+		<md-content style="background-color:#C9EDF1" flex>
 	    
 			    <div layout="column" flex layout-padding>
 					<div ng-repeat="message in messages" ng-switch="message.type">
@@ -25,18 +25,18 @@
 				</div>
 	
 	    </md-content>
-		<form ng-submit="sendMessage();">
+		<form id="chat-form" ng-submit="sendMessage();" style="background-color: azure;">
 			
-        	<div layout="row">
-		        <md-input-container  flex="80">
+        	<div layout="row" >
+		        <md-input-container flex="90">
 		            <input type="text" data-ng-model="messageText">    
 	        	</md-input-container>
-		        <div flex="5" hide-xs hide-sm>
-		          <!-- Spacer //-->
-		        </div>
-		        <md-input-container  flex="20">
-		          <md-button type="submit" class="button md-raised md-primary">Send</md-button> 
-		        </md-input-container>
+
+			    
+			    <md-button type="submit" flex="10">
+				    <ng-md-icon icon="send" style="fill: red"></ng-md-icon>
+				</md-button>
+		     
 		    </div>
 			<!-- <input type="text" data-ng-model="messageText">
 			<input type="submit"> -->

@@ -96,3 +96,7 @@ md-sidenav ng-md-icon {
 .treasure-overlay-spinner-container{
   z-index: 85;
 }
+
+#chat-form md-input-container{
+  margin: 9px 0;
+}
