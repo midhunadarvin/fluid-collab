@@ -2,7 +2,7 @@
   "name": "MEAN",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "~1.4.8",
+    "angular": "~1.4.x",
     "bootstrap": "~3.3.6",
     "angular-ui-router": "~0.2.15",
     "angular-material": "~1.0.1",
@@ -13,6 +13,6 @@
     "angular-treasure-overlay-spinner": "~1.1.0"
   },
   "resolutions": {
-    "angular": "1.4.9"
+    "angular": "~1.4.x"
   }
 }
