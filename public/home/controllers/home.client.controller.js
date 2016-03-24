@@ -244,7 +244,7 @@ angular.module('home')
      {
       link : '/chat',
       title: 'Chat',
-      icon: 'chat'
+      icon: 'forum'
     }
   ];
 

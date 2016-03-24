@@ -2,7 +2,7 @@
 	<md-subheader>Settings</md-subheader> 
 	<md-list> 
 		<md-list-item md-ink-ripple class="inset" ng-repeat="item in items" ng-click="listItemClick($index)">
-			<md-item-content  > 
+			<md-item-content md-autofocus="$index == -1"> 
 				<span flex aria-label="{{item.name}}" > 
 					<span class="md-inline-list-icon-label">{{ item.name }}</span> 
 				</span>

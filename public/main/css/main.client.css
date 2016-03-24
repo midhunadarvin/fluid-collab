@@ -222,7 +222,7 @@ textarea {
   text-align: right;
 }
 
-md-input-container .md-errors-spacer {
+#chat-form md-input-container .md-errors-spacer {
     min-height: 0;
 }
 
